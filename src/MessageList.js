@@ -19,8 +19,14 @@ const messages = [
   },
 ];
 
+const style = {
+  list: {
+    marginTop: '5em',
+  },
+};
+
 const MessageList = () => (
-  <List divided verticalAlign="middle">
+  <List style={style.list} divided verticalAlign="middle">
     {messages.map(a => (
       <List.Item>
         <Image avatar src={a.img} />
