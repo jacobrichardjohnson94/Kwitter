@@ -15,6 +15,32 @@ const CREATE_USER_RESPONSE = 'CREATE_USER_RESPONSE'
 
 
 
+const createUserRequest = (username, password, displayName) => {
+    return {
+    type: CREATE_USER_REQUEST,
+}
+}
 
+const createUserReceived = (data) => {
+    return {
+    type: CREATE_USER_RESPONSE,
+    username: data.username,
+    displayName: data.displayName
+    }
+}
+
+
+
+export const getUserInfo = () => {
+    return {
+    type = GET_USER
+    }
+}
+
+export const deleteUser = () => {
+    return {
+    type = DELETE_USER
+    }
+}
 
 
