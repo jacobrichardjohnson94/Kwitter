@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Grid, Container } from 'semantic-ui-react';
 
-import PageHeader from './PageHeader.js';
-import TweetInput from './TweetInput.js';
-import Tweet from './Tweet.js';
+import PageHeader from './PageHeader.jsx';
+import TweetInput from './TweetInput.jsx';
+import Tweet from './Tweet.jsx';
 // import MessageList from './MessageList.js'; DONT USE YET
-import LoginList from './LoginList.js';
-import CreateAccount from './CreateAccount';
-import './App.css';
+import LoginList from './LoginList.jsx';
+import CreateAccount from './CreateAccount.jsx';
+import '../App.css';
+
 const bgColor = '#f9f9f9';
 const style = {
   mainCol: {

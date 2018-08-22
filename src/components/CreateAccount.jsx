@@ -1,6 +1,10 @@
 import React from 'react';
 import { Header, Icon, Button, Form } from 'semantic-ui-react';
 
+handleSubmit(event) {
+  this.props.createUserRequest
+}
+
 const CreateAccount = () => (
   <Form>
     <Header as="h3">Create Account</Header>
