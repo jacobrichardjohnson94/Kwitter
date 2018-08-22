@@ -15,11 +15,20 @@ export const CREATE_USER_RESPONSE = 'CREATE_USER_RESPONSE';
 const API_URL = 'https://kwitter-api.herokuapp.com/';
 
 export function createUserAsync(newUser) {
+  const options = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newUser),
+  };
+  debugger;
   return dispatch => {
     console.log('why god why');
     dispatch(createUserRequest());
 
-    fetch(API_URL + 'auth/register', newUser)
+    fetch(API_URL + 'auth/register', options)
       .then(res => res.json())
       .then(data => {
         console.log(data);
