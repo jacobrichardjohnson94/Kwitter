@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { Header, Icon, Button, Form } from 'semantic-ui-react';
 import { createUserAsync } from '../actions/user.js';
-import { store } from '../index.js';
+
 import { connect } from 'react-redux';
 
 class CreateAccount extends Component {
@@ -22,19 +22,12 @@ class CreateAccount extends Component {
     event.preventDefault();
     // console.log('this is the state: ', this.state)
     const newUser = {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: this.state.username,
-        displayName: this.state.displayName,
-        password: this.state.password,
-      }),
+      username: this.state.username,
+      displayName: this.state.displayName,
+      password: this.state.password,
     };
 
-    this.props.createUserAsync(newUser);
+    this.props.fetchCreateUser(newUser);
     // this.props.createUserRequest
   };
 
@@ -89,7 +82,7 @@ class CreateAccount extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createUserAsync: newUser => dispatch(createUserAsync(newUser)),
+    fetchCreateUser: newUser => dispatch(createUserAsync(newUser)),
   };
 };
 
