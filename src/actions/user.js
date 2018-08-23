@@ -12,7 +12,33 @@ const UPDATE_USER = 'UPDATE_USER';
 const DELETE_USER = 'DELETE_USER';
 export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST';
 export const CREATE_USER_RESPONSE = 'CREATE_USER_RESPONSE';
+export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
+export const LOGIN_USER_RESPONSE = 'LOGIN_USER_RESponse';
 const API_URL = 'https://kwitter-api.herokuapp.com/';
+
+export function loginUserAsync(loginInfo) {
+  const options = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(loginInfo),
+  };
+
+  return dispatch => {
+    dispatch(loginUserRequest());
+
+    fetch(API_URL + 'auth/login', options)
+      .then(res => res.json())
+      .then(data => {
+        console.log('req login data: ', data);
+        dispatch(loginUserReceived(data));
+        console.log('recieved login data: ', data);
+        return data;
+      });
+  };
+}
 
 export function createUserAsync(newUser) {
   const options = {
@@ -23,7 +49,7 @@ export function createUserAsync(newUser) {
     },
     body: JSON.stringify(newUser),
   };
-  debugger;
+
   return dispatch => {
     console.log('why god why');
     dispatch(createUserRequest());
@@ -49,6 +75,21 @@ const createUserReceived = data => {
     type: CREATE_USER_RESPONSE,
     username: data.username,
     displayName: data.displayName,
+  };
+};
+
+const loginUserRequest = () => {
+  return {
+    type: LOGIN_USER_REQUEST,
+  };
+};
+
+const loginUserReceived = data => {
+  return {
+    type: LOGIN_USER_RESPONSE,
+    id: data.id,
+    token: data.token,
+    loggedIn: data.success,
   };
 };
 

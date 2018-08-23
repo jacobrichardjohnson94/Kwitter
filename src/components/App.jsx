@@ -7,6 +7,7 @@ import Tweet from './Tweet.jsx';
 // import MessageList from './MessageList.js'; DONT USE YET
 import LoginList from './LoginList.jsx';
 import CreateAccount from './CreateAccount.jsx';
+import LoginForm from './LoginForm';
 import '../App.css';
 
 const bgColor = '#f9f9f9';
@@ -27,7 +28,9 @@ class App extends Component {
     return (
       <React.Fragment>
         <PageHeader />
-        <Container style={style.mainCol}>
+        <LoginForm />
+        <CreateAccount />
+        {/* <Container style={style.mainCol}>
           <Grid centered verticalAlign="middle" style={style.mainCol} columns={2}>
             <Grid.Column style={style.col1}>
               <CreateAccount />
@@ -39,8 +42,8 @@ class App extends Component {
                 <Tweet />
               </Grid>
             </Grid.Column>
-          </Grid>
-        </Container>
+          </Grid> 
+        </Container>*/}
       </React.Fragment>
     );
   }
