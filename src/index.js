@@ -5,13 +5,15 @@ import App from './components/App';
 import { Provider } from 'react-redux';
 import 'semantic-ui-css/semantic.min.css';
 import registerServiceWorker from './registerServiceWorker';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose  } from 'redux';
 import { createUserReducer } from './reducer.js';
 import thunk from 'redux-thunk';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
   createUserReducer,
-  applyMiddleware(thunk)
-  //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 ReactDOM.render(
@@ -19,5 +21,6 @@ ReactDOM.render(
     <App />
   </Provider>,
   document.getElementById('root')
+  
 );
 registerServiceWorker();
