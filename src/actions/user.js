@@ -13,7 +13,7 @@ const DELETE_USER = 'DELETE_USER';
 export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST';
 export const CREATE_USER_RESPONSE = 'CREATE_USER_RESPONSE';
 export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
-export const LOGIN_USER_RESPONSE = 'LOGIN_USER_RESponse';
+export const LOGIN_USER_RESPONSE = 'LOGIN_USER_RESPONSE';
 const API_URL = 'https://kwitter-api.herokuapp.com/';
 
 export function loginUserAsync(loginInfo) {

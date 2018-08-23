@@ -5,21 +5,16 @@ import { Header, Icon, Button, Form, Dimmer, Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { loginUserAsync } from '../actions/user';
 class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      username: '',
-      password: '',
-    };
-  }
+  state = {
+    username: '',
+    password: '',
+  };
 
   handleUsernameChange = event => this.setState({ username: event.target.value });
   handlePasswordChange = event => this.setState({ password: event.target.value });
 
   handleSubmit = event => {
     event.preventDefault();
-
     // console.log('this is the state: ', this.state)
     const userInfo = {
       username: this.state.username,
@@ -29,6 +24,7 @@ class LoginForm extends Component {
     console.log('props', this.props);
     this.props.fetchLoginUser(userInfo);
   };
+
   render() {
     return (
       <Form>
