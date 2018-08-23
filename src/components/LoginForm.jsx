@@ -1,15 +1,19 @@
 import React from 'react';
 import { Component } from 'react';
-import { Header, Icon, Button, Form } from 'semantic-ui-react';
+import { Header, Icon, Button, Form, Dimmer, Loader } from 'semantic-ui-react';
 
 import { connect } from 'react-redux';
 import { loginUserAsync } from '../actions/user';
 class LoginForm extends Component {
-  state = {
-    username: '',
+  constructor(props) {
+    super(props);
 
-    password: '',
-  };
+    this.state = {
+      username: '',
+      password: '',
+    };
+  }
+
   handleUsernameChange = event => this.setState({ username: event.target.value });
   handlePasswordChange = event => this.setState({ password: event.target.value });
 
@@ -22,13 +26,17 @@ class LoginForm extends Component {
 
       password: this.state.password,
     };
-
+    console.log('props', this.props);
     this.props.fetchLoginUser(userInfo);
   };
   render() {
-    console.log(this.state);
     return (
       <Form>
+        {this.props.fetching ? (
+          <Dimmer active>
+            <Loader>Loading</Loader>
+          </Dimmer>
+        ) : null}
         <Header as="h3">Create Account</Header>
         <Form.Input
           onChange={this.handleUsernameChange}
@@ -62,6 +70,12 @@ class LoginForm extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    loggedInUser: state.loginUser.loggedInUser,
+    fetching: state.loginUser.fetching,
+  };
+};
 const mapDispatchToProps = dispatch => {
   return {
     fetchLoginUser: userInfo => dispatch(loginUserAsync(userInfo)),
@@ -69,6 +83,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(LoginForm);

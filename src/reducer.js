@@ -32,15 +32,17 @@ export function loginUserReducer(state = initialState, action) {
     case LOGIN_USER_REQUEST:
       return {
         ...state,
+        loggedIn: false,
         fetching: true,
       };
     case LOGIN_USER_RESPONSE:
       return {
+        ...state,
         loggedInUser: {
           id: action.id,
-          loggedIn: action.success,
           token: action.token,
         },
+        loggedIn: true,
         fetching: false,
       };
     default:

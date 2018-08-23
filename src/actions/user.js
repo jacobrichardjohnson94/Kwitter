@@ -51,7 +51,6 @@ export function createUserAsync(newUser) {
   };
 
   return dispatch => {
-    console.log('why god why');
     dispatch(createUserRequest());
 
     fetch(API_URL + 'auth/register', options)
@@ -89,7 +88,7 @@ const loginUserReceived = data => {
     type: LOGIN_USER_RESPONSE,
     id: data.id,
     token: data.token,
-    loggedIn: data.success,
+    loggedIn: true,
   };
 };
 

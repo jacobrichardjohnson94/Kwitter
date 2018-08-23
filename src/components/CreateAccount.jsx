@@ -32,7 +32,6 @@ class CreateAccount extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <Form>
         <Header as="h3">Create Account</Header>

@@ -10,7 +10,7 @@ import { createUserReducer, loginUserReducer } from './reducer.js';
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const rootReducer = combineReducers({ creatUser: createUserReducer, loginUser: loginUserReducer });
+const rootReducer = combineReducers({ createUser: createUserReducer, loginUser: loginUserReducer });
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 ReactDOM.render(
