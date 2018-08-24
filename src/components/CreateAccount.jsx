@@ -1,6 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-import { Header, Icon, Button, Form } from 'semantic-ui-react';
+import { Header, Icon, Button, Form, Dimmer, Loader } from 'semantic-ui-react';
 import { createUserAsync } from '../actions/user.js';
 
 import { connect } from 'react-redux';
@@ -34,6 +34,11 @@ class CreateAccount extends Component {
   render() {
     return (
       <Form>
+        {this.props.fetching ? (
+          <Dimmer active>
+            <Loader>Loading</Loader>
+          </Dimmer>
+        ) : null}
         <Header as="h3">Create Account</Header>
         <Form.Input
           onChange={this.handleUsernameChange}
@@ -79,6 +84,12 @@ class CreateAccount extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    fetching: state.createUser.fetching,
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     fetchCreateUser: newUser => dispatch(createUserAsync(newUser)),
@@ -86,6 +97,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(CreateAccount);

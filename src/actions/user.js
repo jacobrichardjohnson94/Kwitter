@@ -32,7 +32,6 @@ export function loginUserAsync(loginInfo) {
     fetch(API_URL + 'auth/login', options)
       .then(res => res.json())
       .then(data => {
-        console.log('req login data: ', data);
         dispatch(loginUserReceived(data));
         console.log('recieved login data: ', data);
         return data;

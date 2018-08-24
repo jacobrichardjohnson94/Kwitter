@@ -18,7 +18,6 @@ class LoginForm extends Component {
     // console.log('this is the state: ', this.state)
     const userInfo = {
       username: this.state.username,
-
       password: this.state.password,
     };
     console.log('props', this.props);

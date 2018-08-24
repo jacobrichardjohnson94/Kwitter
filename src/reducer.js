@@ -7,11 +7,13 @@ import {
 
 const initialCreateState = {
   fetching: false,
+  userCreated: false,
 };
 
 const initialLoginState = {
   loggedInUser: {},
   fetching: false,
+  loggedIn: false,
 };
 
 export function createUserReducer(state = initialCreateState, action) {
@@ -23,7 +25,7 @@ export function createUserReducer(state = initialCreateState, action) {
       };
     case CREATE_USER_RESPONSE:
       return {
-        ...state,
+        userCreated: true,
         fetching: false,
       };
     default:

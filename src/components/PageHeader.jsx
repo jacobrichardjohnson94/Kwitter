@@ -1,5 +1,8 @@
 import React from 'react';
+import { Component } from 'react';
 import { Header, Segment, Icon, Container } from 'semantic-ui-react';
+
+import { connect } from 'react-redux';
 const bgColor = '#f9f9f9';
 
 const style = {
@@ -7,21 +10,34 @@ const style = {
     backgroundColor: bgColor,
   },
 };
-const PageHeader = () => (
-  <React.Fragment>
-    <Segment style={style.header} clearing>
-      <Header as="h1" floated="left">
-        Kwitter
-      </Header>
+class PageHeader extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Segment style={style.header} clearing>
+          <Header as="h1" floated="left">
+            Kwitter
+          </Header>
 
-      <Header as="h3" floated="right">
-        <Icon name="user" />
-      </Header>
-      <Header as="h3" floated="right">
-        Sign In
-      </Header>
-    </Segment>
-  </React.Fragment>
-);
+          <Header as="h3" floated="right">
+            <Icon name="user" />
+          </Header>
+          <Header as="h3" floated="right">
+            {console.log(this.props)}
+            {this.props.loggedIn ? <p>Logout </p> : <p>Login </p>}
+          </Header>
+        </Segment>
+      </React.Fragment>
+    );
+  }
+}
 
-export default PageHeader;
+const mapStateToProps = state => {
+  return {
+    loggedIn: state.loginUser.loggedIn,
+  };
+};
+export default connect(
+  mapStateToProps,
+  null
+)(PageHeader);
