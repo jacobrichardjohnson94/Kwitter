@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { Header, Icon, Button, Form, Dimmer, Loader } from 'semantic-ui-react';
 import { createUserAsync } from '../actions/user.js';
-
+import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
 
 class CreateAccount extends Component {
@@ -28,6 +28,7 @@ class CreateAccount extends Component {
     };
 
     this.props.fetchCreateUser(newUser);
+
     // this.props.createUserRequest
   };
 

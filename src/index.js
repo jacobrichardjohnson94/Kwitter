@@ -5,17 +5,15 @@ import App from './components/App';
 import { Provider } from 'react-redux';
 import 'semantic-ui-css/semantic.min.css';
 import registerServiceWorker from './registerServiceWorker';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import { createUserReducer, loginUserReducer } from './reducer.js';
-import thunk from 'redux-thunk';
+import { ConnectedRouter } from 'connected-react-router';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const rootReducer = combineReducers({ createUser: createUserReducer, loginUser: loginUserReducer });
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+import { store, history } from './store.js';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 );

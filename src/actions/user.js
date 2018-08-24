@@ -1,3 +1,5 @@
+import { push } from 'connected-react-router';
+
 const AUTH_REGISTER = 'AUTH_REGISTER';
 const AUTH_LOGIN = 'AUTH_LOGIN';
 const AUTH_LOGOUT = 'AUTH_LOGOUT';
@@ -34,6 +36,7 @@ export function loginUserAsync(loginInfo) {
       .then(data => {
         dispatch(loginUserReceived(data));
         console.log('recieved login data: ', data);
+
         return data;
       });
   };
@@ -55,8 +58,8 @@ export function createUserAsync(newUser) {
     fetch(API_URL + 'auth/register', options)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         dispatch(createUserReceived(data));
+        dispatch(push('/login'));
         return data;
       });
   };

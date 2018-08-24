@@ -23,7 +23,6 @@ class PageHeader extends Component {
             <Icon name="user" />
           </Header>
           <Header as="h3" floated="right">
-            {console.log(this.props)}
             {this.props.loggedIn ? <p>Logout </p> : <p>Login </p>}
           </Header>
         </Segment>
