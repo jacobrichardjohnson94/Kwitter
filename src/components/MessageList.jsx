@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { List, Image } from 'semantic-ui-react';
 import SingleMessage from './SingleMessage';
+import { fetchTenMessagesAsync, fetchAllMessagesAsync } from '../actions/messages';
 
 // const messages = [
 //   {
@@ -39,13 +40,12 @@ class MessageList extends Component {
         {this.props.loggedIn 
         ? (
           <List style={style.list} divided verticalAlign="middle">
-          this.props.messageList.map(message => {
-            return (
+          this.props.messageList.map(message => (
               <SingleMessage
               
               />
             )
-          })
+          )
           </List>
         )
 
@@ -71,7 +71,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchMessageList: () => {dispatch(asyncMessageFetch())}
+    fetchTenMessagesList: () => {dispatch(fetchTenMessagesAsync())},
+    fetchAllMessagesList: () => {dispatch(fetchAllMessagesAsync())}
   }
 }
 
