@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Grid, Container } from 'semantic-ui-react';
 
 import PageHeader from './PageHeader.jsx';
-import TweetInput from './TweetInput.jsx';
-import Tweet from './Tweet.jsx';
+import MessageInput from './MessageInput';
+import SingleMessage from './SingleMessage';
 // import MessageList from './MessageList.js'; DONT USE YET
-import LoginList from './LoginList.jsx';
+import MessageList from './MessageList.jsx';
 import CreateAccount from './CreateAccount.jsx';
 import LoginForm from './LoginForm';
 import { Switch, Route } from 'react-router';
@@ -30,8 +30,19 @@ class App extends Component {
     const initialPageComponents = (
       <React.Fragment>
         <PageHeader />
-        <Container>
-          <CreateAccount />
+
+        <Container style={style.mainCol}>
+          <Grid centered verticalAlign="middle" style={style.mainCol} columns={2}>
+            <Grid.Column style={style.col1}>
+              <CreateAccount />
+            </Grid.Column>
+
+            <Grid.Column style={style.col2}>
+              <Grid centered columns={1}>
+                <MessageList />
+              </Grid>
+            </Grid.Column>
+          </Grid>
         </Container>
       </React.Fragment>
     );
@@ -52,20 +63,7 @@ class App extends Component {
       //   <PageHeader />
       //   <LoginForm />
       //   <CreateAccount />
-      //   {/* <Container style={style.mainCol}>
-      //     <Grid centered verticalAlign="middle" style={style.mainCol} columns={2}>
-      //       <Grid.Column style={style.col1}>
-      //         <CreateAccount />
-      //       </Grid.Column>
 
-      //       <Grid.Column style={style.col2}>
-      //         <Grid centered columns={1}>
-      //           <Tweet />
-      //           <Tweet />
-      //         </Grid>
-      //       </Grid.Column>
-      //     </Grid>
-      //   </Container>*/}
       // </React.Fragment>
     );
   }

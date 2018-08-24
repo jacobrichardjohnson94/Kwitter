@@ -1,21 +1,28 @@
 import React from 'react';
 import { List, Image } from 'semantic-ui-react';
+import SingleMessage from './SingleMessage';
 
 const messages = [
   {
-    name: 'Jake J',
+    username: 'JakeyJ',
+    displayName: 'Jake J',
     message: 'Hey dood, lokin sharp',
     img: 'https://react.semantic-ui.com/images/avatar/large/jenny.jpg',
+    createdDate: 'Aug 20',
   },
   {
-    name: 'Taylor G.',
+    username: 'TBone',
+    displayName: 'Taylor G',
     message: 'I suck at coding',
     img: 'https://react.semantic-ui.com/images/avatar/small/mark.png',
+    createdDate: 'Aug 23',
   },
   {
-    name: 'Taylor G',
-    message: "Sorry I'm so lame",
+    username: 'BMoneyBigDollas',
+    displayName: 'Brian S',
+    message: "Yo guys I'm a cool guy.",
     img: 'https://react.semantic-ui.com/images/avatar/small/mark.png',
+    createdDate: 'Aug 24',
   },
 ];
 
@@ -28,13 +35,13 @@ const style = {
 const MessageList = () => (
   <List style={style.list} divided verticalAlign="middle">
     {messages.map(a => (
-      <List.Item>
-        <Image avatar src={a.img} />
-        <List.Content>
-          <List.Header as="a">{a.name}</List.Header>
-          <List.Description>{a.message}</List.Description>
-        </List.Content>
-      </List.Item>
+      <SingleMessage
+        username={a.username}
+        displayName={a.displayName}
+        message={a.message}
+        img={a.img}
+        createdDate={a.createdDate}
+      />
     ))}
   </List>
 );
