@@ -32,7 +32,7 @@ class LoginForm extends Component {
             <Loader>Loading</Loader>
           </Dimmer>
         ) : null}
-        <Header as="h3">Create Account</Header>
+        <Header as="h3">Login</Header>
         <Form.Input
           onChange={this.handleUsernameChange}
           iconPosition="left"
