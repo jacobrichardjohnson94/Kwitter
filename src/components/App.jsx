@@ -8,7 +8,7 @@ import Tweet from './Tweet.jsx';
 import LoginList from './LoginList.jsx';
 import CreateAccount from './CreateAccount.jsx';
 import LoginForm from './LoginForm';
-import { Switch, Route } from 'react-router'
+import { Switch, Route } from 'react-router';
 
 import '../App.css';
 
@@ -27,12 +27,26 @@ const style = {
 };
 class App extends Component {
   render() {
-    const initialPageComponents = <React.Fragment><PageHeader/><CreateAccount/></React.Fragment>
-    const loginPage = <React.Fragment><PageHeader/><LoginForm/></React.Fragment>
+    const initialPageComponents = (
+      <React.Fragment>
+        <PageHeader />
+        <Container>
+          <CreateAccount />
+        </Container>
+      </React.Fragment>
+    );
+    const loginPage = (
+      <React.Fragment>
+        <PageHeader />
+        <Container>
+          <LoginForm />
+        </Container>
+      </React.Fragment>
+    );
     return (
       <Switch>
-        <Route exact path='/' render={() => initialPageComponents}/>
-        <Route exact path='/login' render={()=> loginPage}/>
+        <Route exact path="/" render={() => initialPageComponents} />
+        <Route exact path="/login" render={() => loginPage} />
       </Switch>
       // <React.Fragment>
       //   <PageHeader />
@@ -50,7 +64,7 @@ class App extends Component {
       //           <Tweet />
       //         </Grid>
       //       </Grid.Column>
-      //     </Grid> 
+      //     </Grid>
       //   </Container>*/}
       // </React.Fragment>
     );

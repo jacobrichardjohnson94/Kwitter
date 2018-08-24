@@ -1,13 +1,23 @@
 import React from 'react';
 import { Component } from 'react';
 import { Header, Segment, Icon, Container } from 'semantic-ui-react';
-
+import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
-const bgColor = '#f9f9f9';
+const headerColor = '#6CC2B6';
 
 const style = {
   header: {
-    backgroundColor: bgColor,
+    backgroundColor: headerColor,
+
+    alignItems: 'center',
+  },
+  font: {
+    color: '#FFFFFF ',
+    textDecoration: 'none',
+  },
+  titleFont: {
+    color: '#FFFFFF ',
+    fontSize: '3rem',
   },
 };
 class PageHeader extends Component {
@@ -15,16 +25,28 @@ class PageHeader extends Component {
     return (
       <React.Fragment>
         <Segment style={style.header} clearing>
-          <Header as="h1" floated="left">
-            Kwitter
-          </Header>
+          <div>
+            <Header as="h1" style={style.titleFont} floated="left">
+              <a style={style.font} href="/">
+                Kwitter
+              </a>
+            </Header>
 
-          <Header as="h3" floated="right">
-            <Icon name="user" />
-          </Header>
-          <Header as="h3" floated="right">
-            {this.props.loggedIn ? <p>Logout </p> : <p>Login </p>}
-          </Header>
+            <Header as="h5" icon style={style.font} floated="right">
+              <Icon name="user" />
+            </Header>
+            <Header as="h1" style={style.font} floated="right">
+              {this.props.loggedIn ? (
+                <a style={style.font} href="/logout">
+                  Logout
+                </a>
+              ) : (
+                <a style={style.font} href="/login">
+                  Login
+                </a>
+              )}
+            </Header>
+          </div>
         </Segment>
       </React.Fragment>
     );
