@@ -3,7 +3,7 @@ import {
   CREATE_USER_RESPONSE,
   LOGIN_USER_REQUEST,
   LOGIN_USER_RESPONSE,
-} from './actions/user.js';
+} from '../actions/user.js';
 
 const initialCreateState = {
   fetching: false,

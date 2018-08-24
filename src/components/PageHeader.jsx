@@ -3,6 +3,7 @@ import { Component } from 'react';
 import { Header, Segment, Icon, Container, Item } from 'semantic-ui-react';
 import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom'
 const headerColor = '#6CC2B6';
 
 const style = {
@@ -32,9 +33,11 @@ class PageHeader extends Component {
         <Segment style={style.header} clearing>
           <Container style={style.grid}>
             <Header as="h1" style={style.titleFont} floated="left">
-              <a style={style.font} href="/">
-                Kwitter
-              </a>
+              <p>
+                <Link style={style.font} to="/">
+                  Kwitter
+                </Link>
+              </p>
             </Header>
 
             <Header as="h5" icon style={style.font} floated="right">
@@ -42,13 +45,13 @@ class PageHeader extends Component {
             </Header>
             <Header as="h2" style={style.font} align="middle" floated="right">
               {this.props.loggedIn ? (
-                <a style={style.font} href="/logout">
+                <Link style={style.font} to="/logout">
                   Logout
-                </a>
+                </Link>
               ) : (
-                <a style={style.font} href="/login">
+                <Link style={style.font} to="/login">
                   Login
-                </a>
+                </Link>
               )}
             </Header>
           </Container>
