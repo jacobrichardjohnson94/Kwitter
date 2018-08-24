@@ -8,6 +8,7 @@ import Tweet from './Tweet.jsx';
 import LoginList from './LoginList.jsx';
 import CreateAccount from './CreateAccount.jsx';
 import LoginForm from './LoginForm';
+import { Switch, Route } from 'react-router'
 
 import '../App.css';
 
@@ -26,26 +27,32 @@ const style = {
 };
 class App extends Component {
   render() {
+    const initialPageComponents = <React.Fragment><PageHeader/><CreateAccount/></React.Fragment>
+    const loginPage = <React.Fragment><PageHeader/><LoginForm/></React.Fragment>
     return (
-      <React.Fragment>
-        <PageHeader />
-        <LoginForm />
-        <CreateAccount />
-        {/* <Container style={style.mainCol}>
-          <Grid centered verticalAlign="middle" style={style.mainCol} columns={2}>
-            <Grid.Column style={style.col1}>
-              <CreateAccount />
-            </Grid.Column>
+      <Switch>
+        <Route exact path='/' render={() => initialPageComponents}/>
+        <Route exact path='/login' render={()=> loginPage}/>
+      </Switch>
+      // <React.Fragment>
+      //   <PageHeader />
+      //   <LoginForm />
+      //   <CreateAccount />
+      //   {/* <Container style={style.mainCol}>
+      //     <Grid centered verticalAlign="middle" style={style.mainCol} columns={2}>
+      //       <Grid.Column style={style.col1}>
+      //         <CreateAccount />
+      //       </Grid.Column>
 
-            <Grid.Column style={style.col2}>
-              <Grid centered columns={1}>
-                <Tweet />
-                <Tweet />
-              </Grid>
-            </Grid.Column>
-          </Grid> 
-        </Container>*/}
-      </React.Fragment>
+      //       <Grid.Column style={style.col2}>
+      //         <Grid centered columns={1}>
+      //           <Tweet />
+      //           <Tweet />
+      //         </Grid>
+      //       </Grid.Column>
+      //     </Grid> 
+      //   </Container>*/}
+      // </React.Fragment>
     );
   }
 }
