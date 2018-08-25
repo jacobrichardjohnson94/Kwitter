@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { List, Image } from 'semantic-ui-react';
 import SingleMessage from './SingleMessage';
-
+import { connect } from 'react-redux';
 // const messages = [
 //   {
 //     username: 'JakeyJ',
@@ -36,43 +36,31 @@ class MessageList extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.props.loggedIn 
-        ? (
+        {this.props.loggedIn ? (
           <List style={style.list} divided verticalAlign="middle">
-          this.props.messageList.map(message => {
-            return (
-              <SingleMessage
-              
-              />
-            )
-          })
+            this.props.messageList.map(message => (<SingleMessage />) )
           </List>
-        )
-
-        : 
-         (
-          <List>
-
-          </List>
-         )
-      }
-        
+        ) : (
+          <List />
+        )}
       </React.Fragment>
-    )
+    );
   }
-};
+}
 
 const mapStateToProps = state => {
   return {
     loggedIn: state.loginUser.loggedIn,
-    messageList: state.getMessages.messages
-  }
-}
+    messageList: state.getMessages.messages,
+  };
+};
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchMessageList: () => {dispatch(asyncMessageFetch())}
-  }
-}
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     fetchMessageList: () => {
+//       dispatch(asyncMessageFetch());
+//     },
+//   };
+// };
 
 export default MessageList;
