@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Container } from 'semantic-ui-react';
+import { Grid, Container, Segment } from 'semantic-ui-react';
 
 import PageHeader from './PageHeader.jsx';
 import MessageInput from './MessageInput';
@@ -20,6 +20,9 @@ const style = {
   mainCol: {
     height: '100%',
     marginTop: '5rem',
+  },
+  container: {
+    marginTop: '3rem',
   },
 };
 class App extends Component {
@@ -46,8 +49,10 @@ class App extends Component {
     const loginPage = (
       <React.Fragment>
         <PageHeader />
-        <Container>
-          <LoginForm />
+        <Container style={style.container}>
+          <Segment>
+            <LoginForm />
+          </Segment>
         </Container>
       </React.Fragment>
     );
