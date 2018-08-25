@@ -5,18 +5,17 @@ import {
   LOGIN_USER_RESPONSE,
 } from '../actions/user.js';
 
-const initialCreateState = {
+const initialCreateUserState = {
   fetching: false,
   userCreated: false,
 };
 
-const initialLoginState = {
+const initialLoginUserState = {
   loggedInUser: {},
   fetching: false,
-  loggedIn: false,
 };
 
-export function createUserReducer(state = initialCreateState, action) {
+export function createUserReducer(state = initialCreateUserState, action) {
   switch (action.type) {
     case CREATE_USER_REQUEST:
       return {
@@ -33,7 +32,7 @@ export function createUserReducer(state = initialCreateState, action) {
   }
 }
 
-export function loginUserReducer(state = initialLoginState, action) {
+export function loginUserReducer(state = initialLoginUserState, action) {
   switch (action.type) {
     case LOGIN_USER_REQUEST:
       return {

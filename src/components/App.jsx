@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Container } from 'semantic-ui-react';
+import { Grid, Container, Segment } from 'semantic-ui-react';
 
 import PageHeader from './PageHeader.jsx';
 import MessageInput from './MessageInput';
@@ -10,7 +10,7 @@ import CreateAccount from './CreateAccount.jsx';
 import LoginForm from './LoginForm';
 import { Switch, Route } from 'react-router';
 import { withRouter } from 'react-router-dom';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux';
 
 import '../App.css';
 
@@ -18,13 +18,10 @@ const bgColor = '#f9f9f9';
 const style = {
   mainCol: {
     height: '100%',
+    marginTop: '5rem',
   },
-  col1: {
-    marginTop: '-15em',
-  },
-  col2: {
-    // backgroundColor: bgColor,
-    marginTop: '-15em',
+  container: {
+    marginTop: '3rem',
   },
 };
 class App extends Component {
@@ -33,13 +30,13 @@ class App extends Component {
       <React.Fragment>
         <PageHeader />
 
-        <Container style={style.mainCol}>
-          <Grid centered verticalAlign="middle" style={style.mainCol} columns={2}>
+        <Container>
+          <Grid centered verticalAlign="top" style={style.mainCol} columns={2}>
             <Grid.Column style={style.col1}>
               <CreateAccount />
             </Grid.Column>
 
-            <Grid.Column style={style.col2}>
+            <Grid.Column>
               <Grid centered columns={1}>
                 <MessageList />
               </Grid>
@@ -51,8 +48,10 @@ class App extends Component {
     const loginPage = (
       <React.Fragment>
         <PageHeader />
-        <Container>
-          <LoginForm />
+        <Container style={style.container}>
+          <Segment>
+            <LoginForm />
+          </Segment>
         </Container>
       </React.Fragment>
     );
@@ -77,7 +76,6 @@ const mapStateToProps = state => {
     loggedIn: state.loginUser.loggedIn,
   };
 };
-
 
 export default withRouter(
   connect(

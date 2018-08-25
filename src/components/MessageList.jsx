@@ -37,43 +37,34 @@ class MessageList extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.props.loggedIn 
-        ? (
+        {this.props.loggedIn ? (
           <List style={style.list} divided verticalAlign="middle">
-          this.props.messageList.map(message => (
-              <SingleMessage
-              
-              />
-            )
-          )
+            this.props.messageList.map(message => (<SingleMessage />) )
           </List>
-        )
-
-        : 
-         (
-          <List>
-
-          </List>
-         )
-      }
-        
+        ) : (
+          <List />
+        )}
       </React.Fragment>
-    )
+    );
   }
-};
+}
 
 const mapStateToProps = state => {
   return {
     loggedIn: state.loginUser.loggedIn,
-    messageList: state.getMessages.messages
-  }
-}
+    messageList: state.getMessages.messages,
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchTenMessagesList: () => {dispatch(fetchTenMessagesAsync())},
-    fetchAllMessagesList: () => {dispatch(fetchAllMessagesAsync())}
-  }
-}
+    fetchTenMessagesList: () => {
+      dispatch(fetchTenMessagesAsync());
+    },
+    fetchAllMessagesList: () => {
+      dispatch(fetchAllMessagesAsync());
+    },
+  };
+};
 
 export default MessageList;

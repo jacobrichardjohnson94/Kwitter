@@ -1,61 +1,85 @@
 import React from 'react';
 import { Component } from 'react';
-import { Header, Segment, Icon, Container, Item } from 'semantic-ui-react';
+import { Header, Segment, Icon, Container, Item, Grid, Image } from 'semantic-ui-react';
 import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom';
+import koalaIcon from '../resources/images/koalaIcon.svg';
 const headerColor = '#6CC2B6';
 
 const style = {
   header: {
     backgroundColor: headerColor,
-    verticalAlign: 'middle',
-    alignItems: 'center',
+    width: '100%',
   },
   font: {
     color: '#FFFFFF ',
     textDecoration: 'none',
-    verticalAlign: 'middle',
+    fontSize: '2rem',
   },
   titleFont: {
     color: '#FFFFFF ',
-    fontSize: '2.5rem',
+
+    height: '100%',
   },
   grid: {
-    height: '100%',
-    alignItems: 'center',
+    backgroundColor: headerColor,
+    width: '100%',
+  },
+  col: {
+    width: '100%',
+  },
+  koalaIcon: {
+    minWidth: '3rem',
   },
 };
 class PageHeader extends Component {
   render() {
     return (
       <React.Fragment>
-        <Segment style={style.header} clearing>
-          <Container style={style.grid}>
-            <Header as="h1" style={style.titleFont} floated="left">
-              <p>
-                <Link style={style.font} to="/">
-                  Kwitter
-                </Link>
-              </p>
-            </Header>
+        <div style={style.header}>
+          <Segment style={style.header} clearing>
+            <Grid style={style.col} container relaxed verticalAlign="middle">
+              <Grid.Row style={style.grid}>
+                <Grid.Column width={1}>
+                  <h1>
+                    <Link style={style.font} to="/">
+                      <Image src={koalaIcon} style={style.koalaIcon} />
+                    </Link>
+                  </h1>
+                </Grid.Column>
 
-            <Header as="h5" icon style={style.font} floated="right">
-              <Icon name="user" />
-            </Header>
-            <Header as="h2" style={style.font} align="middle" floated="right">
-              {this.props.loggedIn ? (
-                <Link style={style.font} to="/logout">
-                  Logout
-                </Link>
-              ) : (
-                <Link style={style.font} to="/login">
-                  Login
-                </Link>
-              )}
-            </Header>
-          </Container>
-        </Segment>
+                <Grid.Column width={3}>
+                  <h1 style={style.titleFont}>
+                    <Link style={style.font} to="/">
+                      Kwitter
+                    </Link>
+                  </h1>
+                </Grid.Column>
+                {/* <Grid.Column width={8} /> */}
+                <Grid.Column style={style.col} floated="right" width={1}>
+                  <h1 style={style.font}>
+                    <Icon name="user" />
+                  </h1>
+                </Grid.Column>
+
+                <Grid.Column style={style.col} width={2}>
+                  <h2 style={style.font}>
+                    {this.props.loggedIn ? (
+                      <Link style={style.font} to="/logout">
+                        Logout
+                      </Link>
+                    ) : (
+                      <Link style={style.font} to="/login">
+                        Login
+                      </Link>
+                    )}
+                  </h2>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Segment>
+        </div>
       </React.Fragment>
     );
   }
@@ -66,7 +90,9 @@ const mapStateToProps = state => {
     loggedIn: state.loginUser.loggedIn,
   };
 };
-export default connect(
-  mapStateToProps,
-  null
-)(PageHeader);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(PageHeader)
+);
