@@ -10,7 +10,6 @@ import CreateAccount from './CreateAccount.jsx';
 import LoginForm from './LoginForm';
 import { Switch, Route } from 'react-router';
 import { withRouter } from 'react-router-dom';
-
 import { connect } from 'react-redux';
 
 import '../App.css';
@@ -77,6 +76,7 @@ const mapStateToProps = state => {
     loggedIn: state.loginUser.loggedIn,
   };
 };
+
 export default withRouter(
   connect(
     mapStateToProps,

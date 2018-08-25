@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { List, Image } from 'semantic-ui-react';
 import SingleMessage from './SingleMessage';
-import { connect } from 'react-redux';
+import { fetchTenMessagesAsync, fetchAllMessagesAsync } from '../actions/messages';
+
 // const messages = [
 //   {
 //     username: 'JakeyJ',
@@ -55,12 +56,15 @@ const mapStateToProps = state => {
   };
 };
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     fetchMessageList: () => {
-//       dispatch(asyncMessageFetch());
-//     },
-//   };
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchTenMessagesList: () => {
+      dispatch(fetchTenMessagesAsync());
+    },
+    fetchAllMessagesList: () => {
+      dispatch(fetchAllMessagesAsync());
+    },
+  };
+};
 
 export default MessageList;
