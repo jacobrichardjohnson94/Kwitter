@@ -13,7 +13,7 @@ export function fetchTenMessagesAsync() {
             .then(res => res.json())
             .then(data => {
                 dispatch(getTenMessagesResponse(data))
-                console.log(data)
+                return data
             })
     }
     
@@ -27,9 +27,9 @@ export function fetchAllMessagesAsync() {
             .then(res => res.json())
             .then(data => {
                 dispatch(getAllMessagesResponse(data))
+                return data
             })
     }
-    
 }
 
 
@@ -39,12 +39,14 @@ const getTenMessagesRequest = () => {
     }
 }
 
+
 const getTenMessagesResponse = (data) => {
     return {
-        type: GET_TEN_MESSAGES_RESPONSE
-
+        type: GET_TEN_MESSAGES_RESPONSE,
+        messages: data.messages
     }
 }
+
 
 const getAllMessagesRequest = () => {
     return {
@@ -52,8 +54,10 @@ const getAllMessagesRequest = () => {
     }
 }
 
+
 const getAllMessagesResponse = (data) => {
     return {
-        type: GET_ALL_MESSAGES_RESPONSE
+        type: GET_ALL_MESSAGES_RESPONSE,
+        messages: data.messages
     }
 }
