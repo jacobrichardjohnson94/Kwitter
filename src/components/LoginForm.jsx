@@ -4,6 +4,8 @@ import { Header, Icon, Button, Form, Dimmer, Loader } from 'semantic-ui-react';
 
 import { connect } from 'react-redux';
 import { loginUserAsync } from '../actions/user';
+
+
 class LoginForm extends Component {
   state = {
     username: '',
@@ -26,7 +28,7 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <Form>
+      <Form >
         {this.props.fetching ? (
           <Dimmer active>
             <Loader>Loading</Loader>

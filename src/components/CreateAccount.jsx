@@ -13,14 +13,11 @@ class CreateAccount extends Component {
   };
 
   handleUsernameChange = event => this.setState({ username: event.target.value });
-
   handleDisplayNameChange = event => this.setState({ displayName: event.target.value });
-
   handlePasswordChange = event => this.setState({ password: event.target.value });
 
   handleSubmit = event => {
     event.preventDefault();
-    // console.log('this is the state: ', this.state)
     const newUser = {
       username: this.state.username,
       displayName: this.state.displayName,
@@ -62,7 +59,6 @@ class CreateAccount extends Component {
           <Icon name="id card" />
           <input />
         </Form.Input>
-
         <Form.Input
           onChange={this.handlePasswordChange}
           iconPosition="left"
@@ -73,7 +69,6 @@ class CreateAccount extends Component {
           <Icon name="barcode" />
           <input />
         </Form.Input>
-
         <Button type="submit" onClick={this.handleSubmit} animated="fade">
           <Button.Content visible>Submit</Button.Content>
           <Button.Content hidden>
