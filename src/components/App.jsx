@@ -9,20 +9,21 @@ import MessageList from './MessageList.jsx';
 import CreateAccount from './CreateAccount.jsx';
 import UserInfo from './UserInfo.jsx'
 import LoginForm from './LoginForm';
+import Logout from './Logout';
 import { Switch, Route } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import '../App.css';
 
-const bgColor = '#f9f9f9';
+const bgColor = '#FCFCFC';
 const style = {
   mainCol: {
     height: '100%',
-    marginTop: '5rem',
+    marginTop: '4rem',
   },
-  container: {
-    marginTop: '3rem',
+  loginContainer: {
+    marginTop: '4rem',
   },
 };
 class App extends Component {
@@ -34,7 +35,9 @@ class App extends Component {
         <Container>
           <Grid centered verticalAlign="top" style={style.mainCol} columns={2}>
             <Grid.Column style={style.col1}>
-              <CreateAccount />
+              <Segment>
+                <CreateAccount />
+              </Segment>
             </Grid.Column>
 
             <Grid.Column>
@@ -49,7 +52,7 @@ class App extends Component {
     const loginPage = (
       <React.Fragment>
         <PageHeader />
-        <Container style={style.container}>
+        <Container style={style.loginContainer}>
           <Segment>
             <LoginForm />
           </Segment>
@@ -79,12 +82,6 @@ class App extends Component {
         <Route exact path="/logout" render={() => logoutPage} />
         <Route exact path="/users" render={() => userPage} />
       </Switch>
-      // <React.Fragment>
-      //   <PageHeader />
-      //   <LoginForm />
-      //   <CreateAccount />
-
-      // </React.Fragment>
     );
   }
 }
