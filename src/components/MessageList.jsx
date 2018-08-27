@@ -9,11 +9,20 @@ import { fetchAllUsersAsync } from '../actions/fetch-all-users.js'
 import { connectRouter } from "connected-react-router";
 import {connect} from "react-redux"
 import koalaIcon from '../resources/images/koalaIcon.svg';
+import { Dimmer, Loader } from 'semantic-ui-react';
+
 
 
 const style = {
-  list: {
-    marginTop: "5em"
+  // list: {
+  //   marginTop: "5em",
+  // },
+  container: {
+    marginTop:'1em',
+    height: "23em",
+    overflowX: 'hidden',
+    overflowY: 'scroll'
+
   }
 };
 
@@ -41,22 +50,34 @@ class MessageList extends Component {
     }
     
   render() {
-    console.log(this.props.userList)
     return (
-      <React.Fragment>
+      <div style={style.container}>
+        {this.props.fetching ? (
+          <Dimmer active>
+            <Loader>Loading</Loader>
+          </Dimmer>
+        ) : null}
         <List style={style.list} divided verticalAlign="middle">
-          {this.props.messageList.map(message => (
-            <SingleMessage
+          {this.props.messageList.map(message => {
+            let displayName
+            let username
+            this.props.userList.users.forEach(user => {
+              if(message.userId===user.id){
+                displayName = user.displayName
+                username = user.userName
+              }
+            })
+            return <SingleMessage
             key={message.id}
             message={message.text}
             createdDate={message.createdAt}
-            displayName='still working'
-            username='unsure'
-            userIcon={koalaIcon}
+            displayName={displayName}
+            username={username}
             />
-          ))}
+          }
+          )}
         </List>
-      </React.Fragment>
+      </div>
     );
   }
 }
@@ -65,7 +86,8 @@ const mapStateToProps = state => {
   return {
     loggedIn: state.loginUser.loggedIn,
     messageList: state.getMessages.messages,
-    userList: state.getAllUsers.userList
+    userList: state.getAllUsers.userList,
+    fetching: state.getAllUsers.fetching
   };
 };
 
