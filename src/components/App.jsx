@@ -56,6 +56,16 @@ class App extends Component {
         </Container>
       </React.Fragment>
     );
+    const logoutPage = (
+      <React.Fragment>
+        <PageHeader />
+        <Container style={style.loginContainer}>
+          <Segment>
+            <Logout />
+          </Segment>
+        </Container>
+      </React.Fragment>
+    );
     const userPage = (
       <React.Fragment>
         <PageHeader/>
@@ -66,6 +76,7 @@ class App extends Component {
       <Switch>
         <Route exact path="/" render={() => initialPageComponents} />
         <Route exact path="/login" render={() => loginPage} />
+        <Route exact path="/logout" render={() => logoutPage} />
         <Route exact path="/users" render={() => userPage} />
       </Switch>
       // <React.Fragment>
