@@ -7,6 +7,7 @@ import SingleMessage from './SingleMessage';
 // import MessageList from './MessageList.js'; DONT USE YET
 import MessageList from './MessageList.jsx';
 import CreateAccount from './CreateAccount.jsx';
+import UserInfo from './UserInfo.jsx'
 import LoginForm from './LoginForm';
 import { Switch, Route } from 'react-router';
 import { withRouter } from 'react-router-dom';
@@ -55,10 +56,17 @@ class App extends Component {
         </Container>
       </React.Fragment>
     );
+    const userPage = (
+      <React.Fragment>
+        <PageHeader/>
+        <UserInfo/>
+      </React.Fragment>
+    )
     return (
       <Switch>
         <Route exact path="/" render={() => initialPageComponents} />
         <Route exact path="/login" render={() => loginPage} />
+        <Route exact path="/users" render={() => userPage} />
       </Switch>
       // <React.Fragment>
       //   <PageHeader />

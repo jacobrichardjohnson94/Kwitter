@@ -5,7 +5,6 @@ import {
   fetchTenMessagesAsync,
   fetchAllMessagesAsync
 } from "../actions/messages";
-import { connectRouter } from "connected-react-router";
 import {connect} from "react-redux"
 
 const style = {
