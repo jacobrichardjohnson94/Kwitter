@@ -22,7 +22,7 @@ function SingleMessage(props) {
   return (
     <Card>
       <Card.Content>
-        <Image avatar floated="left" size="tiny" src={props.img} />
+        <Image avatar floated="left" size="tiny" src={props.userIcon} />
         <Card.Header style={style.textAlignLeft}>
           {props.displayName}{' '}
           <span style={style.cardHeadGrey}>
