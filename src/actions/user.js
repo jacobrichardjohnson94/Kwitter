@@ -68,9 +68,8 @@ export function getAllUserInfoAsync(id) {
     fetch(API_URL + 'users')
       .then(res => res.json())
       .then(data => {
-        console.log('sending second login fetch... : ', data);
         const user = data.users.find(a => a.id === id);
-        console.log(user);
+
         dispatch(getAllUserInfoReceived(user));
         return user;
       });
