@@ -3,8 +3,8 @@ import { Component } from 'react';
 import { Header, Icon, Button, Form, Dimmer, Loader } from 'semantic-ui-react';
 
 import { connect } from 'react-redux';
-import { loginUserAsync } from '../actions/user';
-
+import { loginUserAsync, getAllUserInfoAsync } from '../actions/user';
+import { withRouter } from 'react-router-dom';
 
 class LoginForm extends Component {
   state = {
@@ -22,13 +22,13 @@ class LoginForm extends Component {
       username: this.state.username,
       password: this.state.password,
     };
-    console.log('props', this.props);
     this.props.fetchLoginUser(userInfo);
   };
 
   render() {
+    console.log('props', this.props.loggedInUser);
     return (
-      <Form >
+      <Form>
         {this.props.fetching ? (
           <Dimmer active>
             <Loader>Loading</Loader>
@@ -70,16 +70,20 @@ class LoginForm extends Component {
 const mapStateToProps = state => {
   return {
     loggedInUser: state.loginUser.loggedInUser,
+    userInfo: state.loginUser.userInfo,
     fetching: state.loginUser.fetching,
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
     fetchLoginUser: userInfo => dispatch(loginUserAsync(userInfo)),
+    fetchAllUserInfo: token => dispatch(getAllUserInfoAsync(token)),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginForm);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(LoginForm)
+);
