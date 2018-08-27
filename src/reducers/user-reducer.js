@@ -5,6 +5,8 @@ import {
   LOGIN_USER_RESPONSE,
   LOGOUT_USER_REQUEST,
   LOGOUT_USER_RESPONSE,
+  GET_ALL_USER_INFO_REQUEST,
+  GET_ALL_USER_INFO_RESPONSE,
 } from '../actions/user.js';
 
 const initialCreateUserState = {
@@ -51,6 +53,28 @@ export function loginUserReducer(state = initialAuthUserState, action) {
         loggedIn: true,
         fetching: false,
       };
+    case GET_ALL_USER_INFO_REQUEST: {
+      return {
+        ...state,
+        fetching: true,
+      };
+    }
+    case GET_ALL_USER_INFO_RESPONSE: {
+      return {
+        ...state,
+        loggedInUser: {
+          ...state.loggedInUser,
+          username: action.username,
+          id: action.id,
+          displayName: action.displayName,
+          passwordHash: action.passwordHash,
+          createdAt: action.createdAt,
+          updatedAt: action.updatedAt,
+          messages: action.messages,
+        },
+        fetching: false,
+      };
+    }
     case LOGOUT_USER_REQUEST:
       return {
         ...state,
