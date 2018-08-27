@@ -41,7 +41,7 @@ class PageHeader extends Component {
           <Segment style={style.header} clearing>
             <Grid style={style.col} container relaxed verticalAlign="middle">
               <Grid.Row style={style.grid}>
-                <Grid.Column width={1}>
+                <Grid.Column only="computer" width={1}>
                   <h1>
                     <Link style={style.font} to="/">
                       <Image src={koalaIcon} style={style.koalaIcon} />
@@ -49,7 +49,7 @@ class PageHeader extends Component {
                   </h1>
                 </Grid.Column>
 
-                <Grid.Column width={3}>
+                <Grid.Column computer={3} mobile={16}>
                   <h1 style={style.titleFont}>
                     <Link style={style.font} to="/">
                       Kwitter
@@ -57,7 +57,7 @@ class PageHeader extends Component {
                   </h1>
                 </Grid.Column>
                 {/* <Grid.Column width={8} /> */}
-                <Grid.Column style={style.col} floated="right" width={1}>
+                <Grid.Column style={style.col} floated="right" only="computer" width={1}>
                   <h1 style={style.font}>
                     <Icon name="user" />
                   </h1>

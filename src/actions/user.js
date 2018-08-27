@@ -1,23 +1,38 @@
 import { push } from 'connected-react-router';
 
-const AUTH_REGISTER = 'AUTH_REGISTER';
-const AUTH_LOGIN = 'AUTH_LOGIN';
-const AUTH_LOGOUT = 'AUTH_LOGOUT';
-const LIKE_MESSAGE = 'LIKE_MESSAGE';
-const UNLIKE_MESSAGE = 'UNLIKE_MESSAGE';
-const CREATE_NEW_MESSAGE = 'CREATE_NEW_MESSAGE';
-const GET_ALL_MESSAGES = 'GET_ALL_MESSAGES';
-const GET_SPECIFIC_MESSAGE = 'GET_SPECIFIC_MESSAGE';
-const DELETE_SPECIFIC_MESSAGE = 'DELETE_SPECIFIC_MESSAGE';
 const GET_USER = 'GET_USER';
-const UPDATE_USER = 'UPDATE_USER';
+
 const DELETE_USER = 'DELETE_USER';
 export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST';
 export const CREATE_USER_RESPONSE = 'CREATE_USER_RESPONSE';
 export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
 export const LOGIN_USER_RESPONSE = 'LOGIN_USER_RESPONSE';
+export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
+export const LOGOUT_USER_RESPONSE = 'LOGOUT_USER_RESPONSE';
 const API_URL = 'https://kwitter-api.herokuapp.com/';
 
+export function logoutUserAsync() {
+  const options = {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
+
+  return dispatch => {
+    dispatch(logoutUserRequest());
+
+    fetch(API_URL + 'auth/logout', options)
+      .then(res => res.json())
+      .then(data => {
+        dispatch(logoutUserReceived(data));
+        console.log('recieved logout data: ', data);
+
+        return data;
+      });
+  };
+}
 export function loginUserAsync(loginInfo) {
   const options = {
     method: 'POST',
@@ -76,6 +91,20 @@ const createUserReceived = data => {
     type: CREATE_USER_RESPONSE,
     username: data.username,
     displayName: data.displayName,
+  };
+};
+
+const logoutUserRequest = () => {
+  return {
+    type: LOGOUT_USER_REQUEST,
+  };
+};
+
+const logoutUserReceived = data => {
+  return {
+    type: LOGOUT_USER_RESPONSE,
+    message: data.message,
+    loggedIn: false,
   };
 };
 
