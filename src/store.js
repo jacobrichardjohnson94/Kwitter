@@ -4,9 +4,10 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createUserReducer, loginUserReducer } from './reducers/user-reducer.js';
 import thunk from 'redux-thunk';
 import { getMessagesReducer } from './reducers/message-reducer.js';
+import { getAllUsersReducer } from './reducers/fetch-all-users-reducer.js'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const rootReducer = combineReducers({ createUser: createUserReducer, loginUser: loginUserReducer, getMessages: getMessagesReducer });
+const rootReducer = combineReducers({ createUser: createUserReducer, loginUser: loginUserReducer, getMessages: getMessagesReducer, getAllUsers: getAllUsersReducer });
 
 export const history = createBrowserHistory();
 
