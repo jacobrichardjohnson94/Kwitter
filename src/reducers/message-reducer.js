@@ -1,14 +1,14 @@
-import {GET_ALL_MESSAGES_REQUEST, 
-        GET_ALL_MESSAGES_RESPONSE, 
-        GET_TEN_MESSAGES_REQUEST, 
-        GET_TEN_MESSAGES_RESPONSE } 
-        from '../actions/messages.js';
+import {
+  GET_ALL_MESSAGES_REQUEST,
+  GET_ALL_MESSAGES_RESPONSE,
+  GET_TEN_MESSAGES_REQUEST,
+  GET_TEN_MESSAGES_RESPONSE,
+} from '../actions/messages.js';
 
 const initialMessagesState = {
   fetching: false,
   messages: [],
 };
-
 
 export function getMessagesReducer(state = initialMessagesState, action) {
   switch (action.type) {
@@ -33,9 +33,6 @@ export function getMessagesReducer(state = initialMessagesState, action) {
     //     fetching: false
     //   };
     default:
-    return state
+      return state;
   }
 }
-
-
-
