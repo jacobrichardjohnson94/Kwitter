@@ -30,6 +30,17 @@ class MessageList extends Component {
   //   // console.log(this.state)
   // })
 
+  convertDate(date) {
+    let newDate = new Date(date);
+    let formatter = new Intl.DateTimeFormat('en-us', { month: 'short' });
+    let month = formatter.format(newDate);
+    let dt = newDate.getDate();
+    if (dt < 10) {
+      dt = '0' + dt;
+    }
+    return month + '/' + dt;
+  }
+
   componentDidMount() {
     this.props.fetchAllUsers();
   }
@@ -49,14 +60,14 @@ class MessageList extends Component {
             this.props.userList.users.forEach(user => {
               if (message.userId === user.id) {
                 displayName = user.displayName;
-                username = user.userName;
+                username = user.username;
               }
             });
             return (
               <SingleMessage
                 key={message.id}
                 message={message.text}
-                createdDate={message.createdAt}
+                createdDate={this.convertDate(message.createdAt)}
                 displayName={displayName}
                 username={username}
               />
