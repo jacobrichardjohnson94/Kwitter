@@ -11,7 +11,7 @@ import UserInfo from './UserInfo.jsx';
 import LoginForm from './LoginForm';
 import Logout from './Logout';
 import { Switch, Route } from 'react-router';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import '../App.css';
@@ -29,6 +29,7 @@ const style = {
     margin: '0',
     padding: '.5em',
   },
+  loginLink:{ color: 'black', textAlign: 'center' }
 };
 class App extends Component {
   render() {
@@ -42,6 +43,10 @@ class App extends Component {
               <Segment>
                 <CreateAccount />
               </Segment>
+              <p style={style.loginLink}>
+                Already Have An Account?
+                <Link to="/login"> Login</Link>
+              </p>
             </Grid.Column>
 
             <Grid.Column>
