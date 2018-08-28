@@ -57,6 +57,9 @@ export function loginUserAsync(loginInfo) {
       .then(data => {
         dispatch(getAllUserInfoAsync(data.id));
         return data;
+      })
+      .then(() => {
+        dispatch(push('/'));
       });
   };
 }
