@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { Header, Icon, Button, Form, Dimmer, Loader } from 'semantic-ui-react';
 import { createUserAsync } from '../actions/user.js';
-
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class CreateAccount extends Component {
@@ -93,7 +93,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateAccount);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(CreateAccount)
+);
