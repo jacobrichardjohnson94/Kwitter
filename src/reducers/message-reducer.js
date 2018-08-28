@@ -22,16 +22,16 @@ export function getMessagesReducer(state = initialMessagesState, action) {
         messages: action.messages,
         fetching: false,
       };
-    case GET_TEN_MESSAGES_REQUEST:
-      return {
-        ...state,
-        fetching: true,
-      };
-    case GET_TEN_MESSAGES_RESPONSE:
-      return {
-        messages: action.messages,
-        fetching: false
-      };
+    // case GET_TEN_MESSAGES_REQUEST:
+    //   return {
+    //     ...state,
+    //     fetching: true,
+    //   };
+    // case GET_TEN_MESSAGES_RESPONSE:
+    //   return {
+    //     messages: action.messages,
+    //     fetching: false
+    //   };
     default:
     return state
   }

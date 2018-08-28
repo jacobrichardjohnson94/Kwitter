@@ -10,9 +10,9 @@ import { Dimmer, Loader } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 
 const style = {
-  // list: {
-  //   marginTop: "5em",
-  // },
+  list: {
+    marginTop: "em",
+  },
   container: {
     marginTop: '1em',
     height: '23em',
@@ -35,6 +35,7 @@ class MessageList extends Component {
   }
 
   render() {
+    const tenMessageList = this.props.messageList.slice(0, 10)
     return (
       <div style={style.container}>
         {this.props.fetching ? (
@@ -43,13 +44,13 @@ class MessageList extends Component {
           </Dimmer>
         ) : null}
         <List style={style.list} divided verticalAlign="middle">
-          {this.props.messageList.map(message => {
+          {!this.props.loggedIn ? tenMessageList.map(message => {
             let displayName;
             let username;
             this.props.userList.users.forEach(user => {
               if (message.userId === user.id) {
                 displayName = user.displayName;
-                username = user.userName;
+                username = user.username;
               }
             });
             return (
@@ -61,6 +62,24 @@ class MessageList extends Component {
                 username={username}
               />
             );
+          }): this.props.messageList.map(message => {
+            let ALL_MESSAGES_displayName
+            let ALL_MESSAGES_username
+            this.props.userList.users.forEach(user => {
+              if(message.userId === user.id) {
+                ALL_MESSAGES_displayName = user.displayName
+                ALL_MESSAGES_username = user.username
+              }
+            })
+            return (
+              <SingleMessage
+                key={message.id}
+                message={message.text}
+                createdDate={message.createdAt}
+                displayName={ALL_MESSAGES_displayName}
+                username={ALL_MESSAGES_username}
+              />
+            )
           })}
         </List>
       </div>
@@ -79,8 +98,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchTenMessagesList: () => dispatch(fetchTenMessagesAsync()),
-    fetchAllMessagesList: () => dispatch(fetchAllMessagesAsync()),
+    // fetchTenMessagesList: () => dispatch(fetchTenMessagesAsync()),
+    // fetchAllMessagesList: () => dispatch(fetchAllMessagesAsync()),
     fetchAllUsers: () => dispatch(fetchAllUsersAsync()),
   };
 };
