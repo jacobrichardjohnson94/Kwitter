@@ -1,4 +1,5 @@
 import {
+  CREATE_USER_ERROR,
   CREATE_USER_REQUEST,
   CREATE_USER_RESPONSE,
   LOGIN_USER_REQUEST,
@@ -12,6 +13,7 @@ import {
 const initialCreateUserState = {
   fetching: false,
   userCreated: false,
+  errResMessage: ''
 };
 
 const initialAuthUserState = {
@@ -20,6 +22,12 @@ const initialAuthUserState = {
 
 export function createUserReducer(state = initialCreateUserState, action) {
   switch (action.type) {
+    case CREATE_USER_ERROR:
+        return {
+          ...state,
+          fetching: false,
+          errResMessage: action.errorMessage
+        }
     case CREATE_USER_REQUEST:
       return {
         ...state,

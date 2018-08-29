@@ -11,6 +11,7 @@ export const GET_ALL_USER_INFO_REQUEST = 'GET_ALL_USER_INFO_REQUEST';
 export const GET_ALL_USER_INFO_RESPONSE = 'GET_ALL_USER_INFO_RESPONSE';
 export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
 export const LOGOUT_USER_RESPONSE = 'LOGOUT_USER_RESPONSE';
+export const CREATE_USER_ERROR = 'CREATE_USER_ERROR';
 const API_URL = 'https://kwitter-api.herokuapp.com/';
 
 export function logoutUserAsync() {
@@ -95,11 +96,22 @@ export function createUserAsync(newUser) {
     fetch(API_URL + 'auth/register', options)
       .then(res => res.json())
       .then(data => {
+        if (data.errors) {
+          const errResponse = data.errors[0].message
+          return (console.log(errResponse), dispatch(createUserError(errResponse)))
+        } else {
         dispatch(createUserReceived(data));
         dispatch(push('/login'));
-        return data;
+        return data;}
       });
   };
+}
+
+const createUserError = (errResponse) => {
+  return {
+    type: CREATE_USER_ERROR,
+    errorMessage: errResponse
+  }
 }
 
 const createUserRequest = () => {

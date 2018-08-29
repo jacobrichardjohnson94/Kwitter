@@ -3,6 +3,7 @@ import { Component } from "react";
 import { Header, Icon, Button, Form, Dimmer, Loader, List } from "semantic-ui-react";
 import { createUserAsync } from "../actions/user.js";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 
 const style = {
   color: '#B03060'
@@ -65,7 +66,7 @@ class CreateAccount extends Component {
     if (errorsArr.length === 0) {
       this.props.fetchCreateUser(newUser)
     } else {
-      console.log(errorsArr)
+      console.log(this.props.errorMessage)
       this.setState({
         errors: errorsArr
       })
@@ -127,6 +128,7 @@ class CreateAccount extends Component {
            <List.Item style={style} key={errorMsg}> {errorMsg} </List.Item>
         )
       }) : null}
+      {this.props.errorMessage ? <List.Item style={style} key={this.props.errorMessage}> {this.props.errorMessage} </List.Item> : null}
       </List>
       </React.Fragment>
     );
@@ -136,7 +138,8 @@ class CreateAccount extends Component {
 const mapStateToProps = state => {
   return {
     fetching: state.createUser.fetching,
-    loggedIn: state.loginUser.loggedIn
+    loggedIn: state.loginUser.loggedIn,
+    errorMessage: state.createUser.errResMessage
   };
 };
 
