@@ -15,6 +15,8 @@ import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import '../App.css';
+import AccountManagement from './AccountManagement';
+import ChangePw from './ChangePw';
 
 const bgColor = '#FCFCFC';
 const style = {
@@ -29,7 +31,7 @@ const style = {
     margin: '0',
     padding: '.5em',
   },
-  loginLink:{ color: 'black', textAlign: 'center' }
+  loginLink: { color: 'black', textAlign: 'center' },
 };
 class App extends Component {
   render() {
@@ -78,10 +80,16 @@ class App extends Component {
         </Container>
       </React.Fragment>
     );
-    const userPage = (
+    const accountManagementPage = (
       <React.Fragment>
         <PageHeader />
-        <UserInfo />
+        <AccountManagement />
+      </React.Fragment>
+    );
+    const changePwPage = (
+      <React.Fragment>
+        <PageHeader />
+        <ChangePw />
       </React.Fragment>
     );
     return (
@@ -89,7 +97,8 @@ class App extends Component {
         <Route exact path="/" render={() => initialPageComponents} />
         <Route exact path="/login" render={() => loginPage} />
         <Route exact path="/logout" render={() => logoutPage} />
-        <Route exact path="/users" render={() => userPage} />
+        <Route exact path="/account" render={() => accountManagementPage} />
+        <Route exact path="/changepw" render={() => changePwPage} />
       </Switch>
     );
   }

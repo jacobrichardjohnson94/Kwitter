@@ -70,7 +70,7 @@ class LoginForm extends Component {
 const mapStateToProps = state => {
   return {
     loggedInUser: state.loginUser.loggedInUser,
-    userInfo: state.loginUser.userInfo,
+
     fetching: state.loginUser.fetching,
   };
 };
