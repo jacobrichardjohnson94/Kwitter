@@ -7,6 +7,8 @@ export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST';
 export const CREATE_USER_RESPONSE = 'CREATE_USER_RESPONSE';
 export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
 export const LOGIN_USER_RESPONSE = 'LOGIN_USER_RESPONSE';
+export const GET_ALL_USER_INFO_REQUEST = 'GET_ALL_USER_INFO_REQUEST';
+export const GET_ALL_USER_INFO_RESPONSE = 'GET_ALL_USER_INFO_RESPONSE';
 export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
 export const LOGOUT_USER_RESPONSE = 'LOGOUT_USER_RESPONSE';
 const API_URL = 'https://kwitter-api.herokuapp.com/';
@@ -34,7 +36,7 @@ export function logoutUserAsync() {
   };
 }
 export function loginUserAsync(loginInfo) {
-  const options = {
+  const initialOptions = {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -46,13 +48,33 @@ export function loginUserAsync(loginInfo) {
   return dispatch => {
     dispatch(loginUserRequest());
 
-    fetch(API_URL + 'auth/login', options)
+    fetch(API_URL + 'auth/login', initialOptions)
       .then(res => res.json())
       .then(data => {
         dispatch(loginUserReceived(data));
-        console.log('recieved login data: ', data);
-
         return data;
+      })
+      .then(data => {
+        dispatch(getAllUserInfoAsync(data.id));
+        return data;
+      })
+      .then(() => {
+        dispatch(push('/'));
+      });
+  };
+}
+
+export function getAllUserInfoAsync(id) {
+  return dispatch => {
+    dispatch(getAllUserInfoRequest());
+
+    fetch(API_URL + 'users')
+      .then(res => res.json())
+      .then(data => {
+        const user = data.users.find(a => a.id === id);
+
+        dispatch(getAllUserInfoReceived(user));
+        return user;
       });
   };
 }
@@ -123,9 +145,21 @@ const loginUserReceived = data => {
   };
 };
 
-export const getUserInfo = () => {
+export const getAllUserInfoRequest = () => {
   return {
-    type: GET_USER,
+    type: GET_ALL_USER_INFO_REQUEST,
+  };
+};
+export const getAllUserInfoReceived = data => {
+  return {
+    type: GET_ALL_USER_INFO_RESPONSE,
+    username: data.username,
+    id: data.id,
+    displayName: data.displayName,
+    passwordHash: data.passwordHash,
+    createdAt: data.createdAt,
+    updatedAt: data.updatedAt,
+    messages: data.messages,
   };
 };
 
