@@ -41,7 +41,6 @@ class MessageList extends Component {
     }
     
   render() {
-    console.log(this.props.userList)
     return (
       <React.Fragment>
         <List style={style.list} divided verticalAlign="middle">
