@@ -1,8 +1,5 @@
 import { push } from 'connected-react-router';
 
-const GET_USER = 'GET_USER';
-
-const DELETE_USER = 'DELETE_USER';
 export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST';
 export const CREATE_USER_RESPONSE = 'CREATE_USER_RESPONSE';
 export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
@@ -11,6 +8,11 @@ export const GET_ALL_USER_INFO_REQUEST = 'GET_ALL_USER_INFO_REQUEST';
 export const GET_ALL_USER_INFO_RESPONSE = 'GET_ALL_USER_INFO_RESPONSE';
 export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
 export const LOGOUT_USER_RESPONSE = 'LOGOUT_USER_RESPONSE';
+export const UPDATE_USER_PASSWORD_REQUEST = 'UPDATE_USER_PASSWORD_REQUEST ';
+export const UPDATE_USER_PASSWORD_RESPONSE = 'UPDATE_USER_PASSWORD_RESPONSE ';
+export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST';
+export const DELETE_USER_RESPONSE = 'DELETE_USER_RESPONSE';
+
 const API_URL = 'https://kwitter-api.herokuapp.com/';
 
 export function logoutUserAsync() {
@@ -29,7 +31,6 @@ export function logoutUserAsync() {
       .then(res => res.json())
       .then(data => {
         dispatch(logoutUserReceived(data));
-        console.log('recieved logout data: ', data);
 
         return data;
       });
@@ -102,6 +103,25 @@ export function createUserAsync(newUser) {
   };
 }
 
+export function updateUserPasswordAsync(newPassword, token) {
+  const options = {
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer: ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newPassword),
+  };
+  return dispatch => {
+    dispatch(updateUserPasswordRequest());
+    fetch(API_URL + 'users', options).then(data => {
+      dispatch(updateUserPasswordReceived(data));
+      console.log(data);
+      return data;
+    });
+  };
+}
+
 const createUserRequest = () => {
   return {
     type: CREATE_USER_REQUEST,
@@ -129,7 +149,17 @@ const logoutUserReceived = data => {
     loggedIn: false,
   };
 };
-
+const updateUserPasswordRequest = () => {
+  return {
+    type: UPDATE_USER_PASSWORD_REQUEST,
+  };
+};
+const updateUserPasswordReceived = data => {
+  return {
+    type: UPDATE_USER_PASSWORD_RESPONSE,
+    id: data.id,
+  };
+};
 const loginUserRequest = () => {
   return {
     type: LOGIN_USER_REQUEST,
@@ -160,11 +190,5 @@ export const getAllUserInfoReceived = data => {
     createdAt: data.createdAt,
     updatedAt: data.updatedAt,
     messages: data.messages,
-  };
-};
-
-export const deleteUser = () => {
-  return {
-    type: DELETE_USER,
   };
 };

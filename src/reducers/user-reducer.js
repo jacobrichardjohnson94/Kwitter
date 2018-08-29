@@ -7,6 +7,8 @@ import {
   LOGOUT_USER_RESPONSE,
   GET_ALL_USER_INFO_REQUEST,
   GET_ALL_USER_INFO_RESPONSE,
+  UPDATE_USER_PASSWORD_REQUEST,
+  UPDATE_USER_PASSWORD_RESPONSE,
 } from '../actions/user.js';
 
 const initialCreateUserState = {
@@ -15,6 +17,7 @@ const initialCreateUserState = {
 };
 
 const initialAuthUserState = {
+  loggedInUser: {},
   fetching: false,
 };
 
@@ -88,6 +91,17 @@ export function loginUserReducer(state = initialAuthUserState, action) {
         loggedIn: false,
         message: action.message,
         fetching: false,
+      };
+    case UPDATE_USER_PASSWORD_REQUEST:
+      return {
+        ...state,
+        fetching: true,
+      };
+    case UPDATE_USER_PASSWORD_RESPONSE:
+      return {
+        ...state,
+        fetching: false,
+        userPasswordUpdated: action.id,
       };
 
     default:
