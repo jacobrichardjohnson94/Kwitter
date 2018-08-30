@@ -69,10 +69,10 @@ export function getAllUserInfoAsync(id) {
   return dispatch => {
     dispatch(getAllUserInfoRequest());
 
-    fetch(API_URL + 'users')
+    fetch(API_URL + 'users/' + id)
       .then(res => res.json())
       .then(data => {
-        const user = data.users.find(a => a.id === id);
+        const user = data.user;
 
         dispatch(getAllUserInfoReceived(user));
         return user;
@@ -107,7 +107,7 @@ export function updateUserPasswordAsync(newPassword, token) {
   const options = {
     method: 'PATCH',
     headers: {
-      Authorization: `Bearer: ${token}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(newPassword),
@@ -116,7 +116,7 @@ export function updateUserPasswordAsync(newPassword, token) {
     dispatch(updateUserPasswordRequest());
     fetch(API_URL + 'users', options).then(data => {
       dispatch(updateUserPasswordReceived(data));
-      console.log(data);
+
       return data;
     });
   };

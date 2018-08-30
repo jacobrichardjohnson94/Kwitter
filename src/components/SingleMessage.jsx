@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Image } from 'semantic-ui-react';
-import taylorLMAO from '../resources/images/TbonesGoofyAssFace.png';
+import koalaIcon from '../resources/images/koalaUser.jpg';
 import Tweet from './pure-react-tweet-component-props/Tweet.js';
 
 function SingleMessage(props) {
@@ -21,7 +21,7 @@ function SingleMessage(props) {
 
   let tweetInfo = {
     message: props.message,
-    gravatar: taylorLMAO,
+    gravatar: koalaIcon,
     author: {
       handle: props.username,
       name: props.displayName,

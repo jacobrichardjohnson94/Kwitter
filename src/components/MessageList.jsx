@@ -40,13 +40,13 @@ class MessageList extends Component {
   formatDate = date => Date.parse(date);
 
   componentDidMount() {
-    this.props.messageList.sort((a, b) => a.id < b.id);
+    this.props.messages.sort((a, b) => a.id < b.id);
     this.props.fetchAllUsers();
   }
 
   render() {
-    let tenMessageList = this.props.messageList.slice(0, 10).sort((a, b) => a.id < b.id);
-    let allMessageList = this.props.messageList.sort((a, b) => a.id < b.id);
+    let tenMessageList = this.props.messages.slice(0, 10).sort((a, b) => a.id < b.id);
+    let allMessageList = this.props.messages.sort((a, b) => a.id < b.id);
     console.log(allMessageList);
     return (
       <div style={style.container}>
