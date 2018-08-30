@@ -72,10 +72,14 @@ export function getAllUserInfoAsync(id) {
     fetch(API_URL + 'users')
       .then(res => res.json())
       .then(data => {
-        const user = data.users.find(a => a.id === id);
+        console.log('data: '+data)
+        
+        // const user = data.users.find(a => a.id === data.id);
+        // console.log('this is the user' + user)
 
-        dispatch(getAllUserInfoReceived(user));
-        return user;
+        dispatch(getAllUserInfoReceived(data));
+        // console.log(user)
+        return data;
       });
   };
 }
@@ -116,7 +120,6 @@ export function updateUserPasswordAsync(newPassword, token) {
     dispatch(updateUserPasswordRequest());
     fetch(API_URL + 'users', options).then(data => {
       dispatch(updateUserPasswordReceived(data));
-      console.log(data);
       return data;
     });
   };
