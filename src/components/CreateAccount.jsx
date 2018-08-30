@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 import React from 'react';
 import { Component } from 'react';
 import { Header, Icon, Button, Form, Dimmer, Loader, List } from 'semantic-ui-react';
 import { createUserAsync } from '../actions/user.js';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+=======
+import React from "react";
+import { Component } from "react";
+import { Header, Icon, Button, Form, Dimmer, Loader, List } from "semantic-ui-react";
+import { createUserAsync } from "../actions/user.js";
+import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom'
+>>>>>>> origin
 
 const style = {
   color: '#B03060',
