@@ -12,6 +12,7 @@ export function fetchAllUsersAsync() {
       .then(res => res.json())
       .then(data => {
         dispatch(getAllUsersResponse(data));
+        console.log(data)
         return data;
       })
       .then(() => {

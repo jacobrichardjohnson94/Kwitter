@@ -20,34 +20,18 @@ const style = {
 };
 
 class MessageList extends Component {
-  // formatDate(date) {
-  //   const newDate = new Date(date);
-  //   const now = Date.now();
-  //   const dateInMilliseconds = newDate.getTime();
-  //   const minutesElapsed = (now - dateInMilliseconds) / 60000;
-  //   console.log(minutesElapsed);
-  //   const formatter = new Intl.DateTimeFormat('en-us', { month: 'short' });
-  //   const nameOfMonth = formatter.format(newDate);
-  //   let dayOfMonth = newDate.getDate();
-  //   let numOfMonth = newDate.getMonth();
-  //   let year = newDate.getYear();
-
-  //   if (dayOfMonth < 10) dayOfMonth = '0' + dayOfMonth;
-
-  //   return nameOfMonth + ' ' + dayOfMonth;
-  // }
 
   formatDate = date => Date.parse(date);
 
   componentDidMount() {
-    this.props.messageList.sort((a, b) => a.id < b.id);
     this.props.fetchAllUsers();
   }
 
   render() {
-    let tenMessageList = this.props.messageList.slice(0, 10).sort((a, b) => a.id < b.id);
-    let allMessageList = this.props.messageList.sort((a, b) => a.id < b.id);
-    console.log(allMessageList);
+    this.props.messageList.sort((a, b)=> new Date(b.createdAt)-new Date(a.createdAt))
+
+    let tenMessageList = this.props.messageList.slice(0, 10)
+    let allMessageList = this.props.messageList
     return (
       <div style={style.container}>
         {this.props.fetching ? (
@@ -71,7 +55,6 @@ class MessageList extends Component {
                     key={message.id}
                     id={message.id}
                     message={message.text || ''}
-                    /* createdDate={this.formatDate(message.createdAt)} */
                     createdDate={this.formatDate(message.createdAt)}
                     displayName={displayName}
                     username={username}
