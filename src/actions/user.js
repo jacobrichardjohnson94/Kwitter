@@ -72,13 +72,7 @@ export function getAllUserInfoAsync(id) {
     fetch(API_URL + 'users')
       .then(res => res.json())
       .then(data => {
-        console.log('data: '+data)
-        
-        // const user = data.users.find(a => a.id === data.id);
-        // console.log('this is the user' + user)
-
         dispatch(getAllUserInfoReceived(data));
-        // console.log(user)
         return data;
       });
   };

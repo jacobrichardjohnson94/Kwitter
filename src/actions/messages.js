@@ -13,7 +13,6 @@ export function fetchAllMessagesAsync() {
       .then(res => res.json())
       .then(data => {
         dispatch(getAllMessagesResponse(data.messages));
-        console.log(data.messages)
         return data.messages;
       });
   };

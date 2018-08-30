@@ -26,7 +26,7 @@ class LoginForm extends Component {
   };
 
   render() {
-    console.log('props', this.props.loggedInUser);
+    // console.log('props', this.props.loggedInUser);
     return (
       <Form>
         {this.props.fetching ? (
