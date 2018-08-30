@@ -59,7 +59,13 @@ class PageHeader extends Component {
                 {/* <Grid.Column width={8} /> */}
                 <Grid.Column style={style.col} floated="right" only="computer" width={1}>
                   <h1 style={style.font}>
-                    <Icon name="user" />
+                    {this.props.loggedIn ? (
+                      <Link style={style.font} to="/account">
+                        <Icon name="user" />
+                      </Link>
+                    ) : (
+                      <Icon name="user" />
+                    )}
                   </h1>
                 </Grid.Column>
 
