@@ -22,19 +22,18 @@ const style = {
 
 class MessageList extends Component {
   formatDate = date => Date.parse(date);
-
+  messages = this.props.messages;
   componentDidMount() {
     this.props.fetchAllUsers();
   }
 
   render() {
-    this.props.messageList.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    this.messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-    let tenMessageList = this.props.messageList.slice(0, 10);
-    let allMessageList = this.props.messageList;
+    let tenMessageList = this.messages.slice(0, 10);
+    let allMessageList = this.messages;
     return (
       <React.Fragment>
-        {this.props.loggedIn ? <MessageInput /> : null}
         <div style={style.container}>
           {this.props.fetching ? (
             <Dimmer active>
@@ -102,6 +101,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchAllUsers: () => dispatch(fetchAllUsersAsync()),
+    fetchAllMessages: () => dispatch(fetchAllMessagesAsync()),
   };
 };
 
