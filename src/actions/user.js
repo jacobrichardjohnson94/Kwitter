@@ -53,10 +53,11 @@ export function loginUserAsync(loginInfo) {
       .then(res => res.json())
       .then(data => {
         dispatch(loginUserReceived(data));
+        console.log(data);
         return data;
       })
       .then(data => {
-        dispatch(getAllUserInfoAsync(data.id));
+        dispatch(getAllUserInfoAsync(data.token, data.id));
         return data;
       })
       .then(() => {
@@ -65,14 +66,22 @@ export function loginUserAsync(loginInfo) {
   };
 }
 
-export function getAllUserInfoAsync(id) {
+export function getAllUserInfoAsync(token, id) {
+  const options = {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
   return dispatch => {
     dispatch(getAllUserInfoRequest());
 
-    fetch(API_URL + 'users/' + id)
+    fetch(API_URL + 'users/' + id, options)
       .then(res => res.json())
       .then(data => {
-        dispatch(getAllUserInfoReceived(data));
+        console.log(data);
+        dispatch(getAllUserInfoReceived(data.user));
         return data;
       });
   };
