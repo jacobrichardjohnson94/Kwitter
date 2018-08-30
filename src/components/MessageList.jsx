@@ -8,7 +8,11 @@ import { connect } from 'react-redux';
 import koalaIcon from '../resources/images/koalaIcon.svg';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
+<<<<<<< HEAD
+import MessageInput from './MessageInput.jsx';
+=======
 import MessageInput from './MessageInput.jsx'
+>>>>>>> origin
 
 const style = {
   list: {},
@@ -21,7 +25,10 @@ const style = {
 };
 
 class MessageList extends Component {
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin
   formatDate = date => Date.parse(date);
 
   componentDidMount() {
@@ -29,6 +36,65 @@ class MessageList extends Component {
   }
 
   render() {
+<<<<<<< HEAD
+    this.props.messageList.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    let tenMessageList = this.props.messageList.slice(0, 10);
+    let allMessageList = this.props.messageList;
+    return (
+      <React.Fragment>
+        {this.props.loggedIn ? <MessageInput /> : null}
+        <div style={style.container}>
+          {this.props.fetching ? (
+            <Dimmer active>
+              <Loader>Loading</Loader>
+            </Dimmer>
+          ) : null}
+          <List style={style.list} divided verticalAlign="middle">
+            {!this.props.loggedIn
+              ? tenMessageList.map(message => {
+                  let displayName;
+                  let username;
+                  this.props.userList.users.forEach(user => {
+                    if (message.userId === user.id) {
+                      displayName = user.displayName;
+                      username = user.username;
+                    }
+                  });
+                  return (
+                    <SingleMessage
+                      key={message.id}
+                      id={message.id}
+                      message={message.text || ''}
+                      createdDate={this.formatDate(message.createdAt)}
+                      displayName={displayName}
+                      username={username}
+                    />
+                  );
+                })
+              : allMessageList.map(message => {
+                  let allMessagesDisplayName;
+                  let allMessagesUsername;
+                  this.props.userList.users.forEach(user => {
+                    if (message.userId === user.id) {
+                      allMessagesDisplayName = user.displayName;
+                      allMessagesUsername = user.username;
+                    }
+                  });
+                  return (
+                    <SingleMessage
+                      key={message.id}
+                      id={message.id}
+                      message={message.text || ''}
+                      createdDate={message.createdAt}
+                      displayName={allMessagesDisplayName}
+                      username={allMessagesUsername}
+                    />
+                  );
+                })}
+          </List>
+        </div>
+=======
     this.props.messageList.sort((a, b)=> new Date(b.createdAt)-new Date(a.createdAt))
 
     let tenMessageList = this.props.messageList.slice(0, 10)
@@ -86,6 +152,7 @@ class MessageList extends Component {
               })}
         </List>
       </div>
+>>>>>>> origin
       </React.Fragment>
     );
   }

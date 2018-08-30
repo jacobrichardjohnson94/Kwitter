@@ -22,9 +22,10 @@ function Tweet({ tweet }) {
         <Time time={tweet.timestamp} />
         <Message text={tweet.message} />
         <div className="buttons">
+          <LikeButton count={tweet.likes} />
           <ReplyButton />
           <RetweetButton count={tweet.retweets} />
-          <LikeButton count={tweet.likes} />
+
           <MoreOptionsButton />
         </div>
       </div>
