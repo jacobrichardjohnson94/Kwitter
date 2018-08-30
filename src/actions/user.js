@@ -72,10 +72,8 @@ export function getAllUserInfoAsync(id) {
     fetch(API_URL + 'users/' + id)
       .then(res => res.json())
       .then(data => {
-        const user = data.user;
-
-        dispatch(getAllUserInfoReceived(user));
-        return user;
+        dispatch(getAllUserInfoReceived(data));
+        return data;
       });
   };
 }
@@ -116,7 +114,6 @@ export function updateUserPasswordAsync(newPassword, token) {
     dispatch(updateUserPasswordRequest());
     fetch(API_URL + 'users', options).then(data => {
       dispatch(updateUserPasswordReceived(data));
-
       return data;
     });
   };

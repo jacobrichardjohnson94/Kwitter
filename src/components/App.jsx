@@ -45,15 +45,18 @@ class App extends Component {
 
         <Container>
           <Grid verticalAlign="middle" style={style.mainCol} columns={2}>
+          {!this.props.loggedIn ? (
             <Grid.Column style={style.col1}>
-              <Segment>
-                <CreateAccount />
-              </Segment>
-              <p style={style.loginLink}>
-                Already Have An Account?
-                <Link to="/login"> Login</Link>
-              </p>
-            </Grid.Column>
+            <Segment>
+              <CreateAccount />
+            </Segment>
+            <p style={style.loginLink}>
+              Already Have An Account?
+              <Link to="/login"> Login</Link>
+            </p>
+          </Grid.Column>
+          ): null}
+            
 
             <Grid.Column>
               <Grid centered columns={1}>
