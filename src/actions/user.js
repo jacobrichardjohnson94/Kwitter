@@ -12,6 +12,7 @@ export const GET_ALL_USER_INFO_RESPONSE = 'GET_ALL_USER_INFO_RESPONSE';
 export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
 export const LOGOUT_USER_RESPONSE = 'LOGOUT_USER_RESPONSE';
 export const CREATE_USER_ERROR = 'CREATE_USER_ERROR';
+export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR'
 const API_URL = 'https://kwitter-api.herokuapp.com/';
 
 export function logoutUserAsync() {
@@ -48,21 +49,43 @@ export function loginUserAsync(loginInfo) {
 
   return dispatch => {
     dispatch(loginUserRequest());
+    let loginErr = false
 
     fetch(API_URL + 'auth/login', initialOptions)
       .then(res => res.json())
       .then(data => {
-        dispatch(loginUserReceived(data));
-        return data;
+        if(data.success === false) {
+          (dispatch(loginUserError()))
+          console.log(data)
+          return (loginErr = true)
+        } else {
+          console.log("shouldnt be here")
+          dispatch(loginUserReceived(data));
+          return data;
+        }
       })
       .then(data => {
-        dispatch(getAllUserInfoAsync(data.id));
-        return data;
+        if(loginErr===false) {
+          dispatch(getAllUserInfoAsync(data.id));
+          return data;
+        } else {
+          return
+        }
       })
-      .then(() => {
-        dispatch(push('/'));
+      .then((data) => {
+        if(loginErr===false) {
+          dispatch(push('/'));
+        } else {
+          return
+        }
       });
   };
+}
+
+export function loginUserError() {
+  return {
+    type: LOGIN_USER_ERROR
+  }
 }
 
 export function getAllUserInfoAsync(id) {
@@ -73,7 +96,6 @@ export function getAllUserInfoAsync(id) {
       .then(res => res.json())
       .then(data => {
         const user = data.users.find(a => a.id === id);
-
         dispatch(getAllUserInfoReceived(user));
         return user;
       });
