@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import koalaIcon from '../resources/images/koalaIcon.svg';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
+import MessageInput from './MessageInput.jsx'
 
 const style = {
   list: {},
@@ -33,6 +34,8 @@ class MessageList extends Component {
     let tenMessageList = this.props.messageList.slice(0, 10)
     let allMessageList = this.props.messageList
     return (
+      <React.Fragment>
+        {this.props.loggedIn ? (<MessageInput/>): null}
       <div style={style.container}>
         {this.props.fetching ? (
           <Dimmer active>
@@ -83,6 +86,7 @@ class MessageList extends Component {
               })}
         </List>
       </div>
+      </React.Fragment>
     );
   }
 }
