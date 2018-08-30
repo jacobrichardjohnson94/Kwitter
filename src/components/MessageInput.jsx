@@ -15,31 +15,9 @@ class MessageInput extends Component {
 
   handleMessageChange = event => this.setState({message: event.target.value})
 
-  submitMessageOnClick = event => {
-    event.preventDefault()
-    const body = {
-      'text': this.state.message
-    }
-    fetch("https://kwitter-api.herokuapp.com/messages", {
-      method: "POST",
-      headers: {
-        'Authorization': `Bearer ${this.props.loggedInUserAuthKey}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-      
-      })
-      .then(res=> res.json()).then(data=>{
 
-        this.props.fetchAllMessages()
-        
-      }
-      )
-    this.setState({message: ''})
-  };
-
-  submitMessageOnEnter = event => {
-    if(event.key === 'Enter'){
+  submitMessageOnEvent = event => {
+    if(event.key === 'Enter' || event.type === 'click'){
     const body = {
       'text': this.state.message
     }
@@ -67,10 +45,10 @@ class MessageInput extends Component {
         <Input
           onChange={this.handleMessageChange}
           value={this.state.message}
-          onKeyPress={this.submitMessageOnEnter}
+          onKeyPress={this.submitMessageOnEvent}
           fluid
           size="large"
-          icon={<Icon name="edit" link onClick={this.submitMessageOnClick}  />}
+          icon={<Icon name="edit" link onClick={this.submitMessageOnEvent}  />}
           placeholder="Post a message to the timeline..."
         />
       </div>
