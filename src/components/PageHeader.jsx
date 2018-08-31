@@ -63,9 +63,7 @@ class PageHeader extends Component {
                       <Link style={style.font} to="/account">
                         <Icon name="user" />
                       </Link>
-                    ) : (
-                      <Icon name="user" />
-                    )}
+                    ) : null}
                   </h1>
                 </Grid.Column>
 

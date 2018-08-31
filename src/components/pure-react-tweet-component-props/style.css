@@ -2,12 +2,15 @@
   border: 1px solid #ccc;
   width: 364px;
   min-height: 90px;
-  max-height: 110px;
+  max-height: 150px;
   padding: 10px;
+  padding-bottom: 5px;
+  border-radius: 10px;
   display: flex;
   font-family: 'Helvetica', arial, sans-serif;
   font-size: 14px;
   line-height: 18px;
+  margin: 0.8em;
 }
 
 .avatar {
@@ -33,7 +36,8 @@
 }
 
 .buttons {
-  margin-top: 10px;
+  margin-top: 20px;
+  margin-bottom: 0;
   margin-left: 2px;
   font-size: 1.4em;
   color: #aab8c2;
@@ -61,11 +65,15 @@
 .retweet-count {
   position: relative;
   bottom: 2px;
-  font-size: 16px;
+  font-size: 0.5em;
   margin-left: 6px;
   font-weight: bold;
 }
 .message,
 .name {
   color: black;
+}
+.like-button {
+  display: flex;
+  align-items: center;
 }

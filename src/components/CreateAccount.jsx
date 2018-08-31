@@ -1,41 +1,32 @@
-import React from "react";
-import { Component } from "react";
-import {
-  Header,
-  Icon,
-  Button,
-  Form,
-  Dimmer,
-  Loader,
-  List
-} from "semantic-ui-react";
-import { createUserAsync } from "../actions/user.js";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import { Component } from 'react';
+import { Header, Icon, Button, Form, Dimmer, Loader, List } from 'semantic-ui-react';
+import { createUserAsync } from '../actions/user.js';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 const style = {
-  color: "#B03060"
+  color: '#B03060',
 };
-
 class CreateAccount extends Component {
   state = {
-    username: "",
-    displayName: "",
-    password: ""
+    username: '',
+    displayName: '',
+    password: '',
   };
   handleUsernameChange = event => {
     this.setState({
-      username: event.target.value
+      username: event.target.value,
     });
   };
   handleDisplayNameChange = event => {
     this.setState({
-      displayName: event.target.value
+      displayName: event.target.value,
     });
   };
   handlePasswordChange = event => {
     this.setState({
-      password: event.target.value
+      password: event.target.value,
     });
   };
 
@@ -166,7 +157,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchCreateUser: newUser => dispatch(createUserAsync(newUser))
+    fetchCreateUser: newUser => dispatch(createUserAsync(newUser)),
   };
 };
 

@@ -36,11 +36,11 @@ class LoginForm extends Component {
       username: this.state.username,
       password: this.state.password
     };
+    const user = this.props.loggedInUser;
     this.props.fetchLoginUser(userInfo);
   };
 
   render() {
-    console.log("props", this.props.loggedInUser);
     return (
       <React.Fragment>
         <Form>
@@ -101,7 +101,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchLoginUser: userInfo => dispatch(loginUserAsync(userInfo)),
-    fetchAllUserInfo: token => dispatch(getAllUserInfoAsync(token))
+    fetchAllUserInfo: (token, id) => dispatch(getAllUserInfoAsync(token, id)),
   };
 };
 

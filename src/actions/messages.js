@@ -5,20 +5,6 @@ export const GET_TEN_MESSAGES_RESPONSE = 'GET_ALL_MESSAGES_RESPONSE';
 
 const MESSAGE_API_URL = 'https://kwitter-api.herokuapp.com/messages';
 
-// export function fetchTenMessagesAsync() {
-//     return dispatch => {
-//         dispatch(getTenMessagesRequest())
-
-//         fetch(`${MESSAGE_API_URL}?limit=10`)
-//             .then(res => res.json())
-//             .then(data => {
-//                 dispatch(getTenMessagesResponse(data))
-//                 return data
-//             })
-//     }
-
-// }
-
 export function fetchAllMessagesAsync() {
   return dispatch => {
     dispatch(getAllMessagesRequest());
@@ -26,24 +12,11 @@ export function fetchAllMessagesAsync() {
     fetch(MESSAGE_API_URL)
       .then(res => res.json())
       .then(data => {
-        dispatch(getAllMessagesResponse(data));
-        return data;
+        dispatch(getAllMessagesResponse(data.messages));
+        return data.messages;
       });
   };
 }
-
-// const getTenMessagesRequest = () => {
-//     return {
-//         type: GET_TEN_MESSAGES_REQUEST
-//     }
-// }
-
-// const getTenMessagesResponse = (data) => {
-//     return {
-//         type: GET_TEN_MESSAGES_RESPONSE,
-//         messages: data.messages
-//     }
-// }
 
 const getAllMessagesRequest = () => {
   return {
@@ -54,6 +27,6 @@ const getAllMessagesRequest = () => {
 const getAllMessagesResponse = data => {
   return {
     type: GET_ALL_MESSAGES_RESPONSE,
-    messages: data.messages.sort((a, b) => a.id < b.id),
+    messages: data
   };
 };
