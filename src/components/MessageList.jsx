@@ -17,21 +17,22 @@ const style = {
     padding: '.2em',
     overflowX: 'hidden',
     overflowY: 'scroll',
+    background: '#F8F8F8'
   },
 };
 
 class MessageList extends Component {
   formatDate = date => Date.parse(date);
-  messages = this.props.messages;
   componentDidMount() {
     this.props.fetchAllUsers();
   }
-
+  
   render() {
-    this.messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    const messages = this.props.messages;
+    messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-    let tenMessageList = this.messages.slice(0, 10);
-    let allMessageList = this.messages;
+    let tenMessageList = messages.slice(0, 10);
+    let allMessageList = messages;
     return (
       <React.Fragment>
         <div style={style.container}>
