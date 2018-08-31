@@ -22,4 +22,4 @@ LikeButton.propTypes = {
   count: PropTypes.number,
 };
 
-export default LikeButton;
+export default LikeButton
