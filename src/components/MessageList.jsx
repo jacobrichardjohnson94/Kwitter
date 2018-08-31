@@ -17,6 +17,7 @@ const style = {
     padding: '.2em',
     overflowX: 'hidden',
     overflowY: 'scroll',
+    background: '#F8F8F8'
   },
 };
 
@@ -25,7 +26,7 @@ class MessageList extends Component {
   componentDidMount() {
     this.props.fetchAllUsers();
   }
-
+  
   render() {
     const messages = this.props.messages;
     messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));

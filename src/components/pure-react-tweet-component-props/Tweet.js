@@ -15,7 +15,7 @@ import './style.css';
 
 function Tweet({ tweet }) {
   return (
-    <div className="tweet">
+    <div style={{background: 'white'}}className="tweet">
       <Avatar hash={tweet.gravatar} />
       <div className="content">
         <NameWithHandle author={tweet.author} />
