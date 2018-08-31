@@ -1,8 +1,10 @@
 import {
+  CREATE_USER_ERROR,
   CREATE_USER_REQUEST,
   CREATE_USER_RESPONSE,
   LOGIN_USER_REQUEST,
   LOGIN_USER_RESPONSE,
+  LOGIN_USER_ERROR,
   LOGOUT_USER_REQUEST,
   LOGOUT_USER_RESPONSE,
   GET_ALL_USER_INFO_REQUEST,
@@ -14,15 +16,23 @@ import {
 const initialCreateUserState = {
   fetching: false,
   userCreated: false,
+  errResMessage: ''
 };
 
 const initialAuthUserState = {
   loggedInUser: {},
   fetching: false,
+  loginError: ''
 };
 
 export function createUserReducer(state = initialCreateUserState, action) {
   switch (action.type) {
+    case CREATE_USER_ERROR:
+      return {
+        ...state,
+        fetching: false,
+        errResMessage: action.errorMessage
+      }
     case CREATE_USER_REQUEST:
       return {
         ...state,
@@ -40,6 +50,11 @@ export function createUserReducer(state = initialCreateUserState, action) {
 
 export function loginUserReducer(state = initialAuthUserState, action) {
   switch (action.type) {
+    case LOGIN_USER_ERROR:
+    return {
+      fetching: false,
+      loginError: 'Invalid username or password'
+    }
     case LOGIN_USER_REQUEST:
       return {
         ...state,

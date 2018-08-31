@@ -32,33 +32,32 @@ class CreateAccount extends Component {
 
   checkUsername = errorsArr => {
     if (this.state.username.length < 5) {
-      errorsArr.push('Username must be between 5-15 characters');
+      errorsArr.push("Username must be between 5-15 characters");
     } else if (this.state.username.length > 15) {
-      errorsArr.push('Username must be between 5-15 characters');
+      errorsArr.push("Username must be between 5-15 characters");
     }
   };
 
   checkDisplayName = errorsArr => {
     if (this.state.displayName.length < 5) {
-      errorsArr.push('Display name must be between 5-15 characters');
+      errorsArr.push("Display name must be between 5-15 characters");
     } else if (this.state.displayName.length > 15) {
-      errorsArr.push('Display name must be between 5-15 characters');
+      errorsArr.push("Display name must be between 5-15 characters");
     }
   };
 
   checkPassword = errorsArr => {
     if (this.state.password.length < 5) {
-      errorsArr.push('Password must be at least 5 characters');
+      errorsArr.push("Password must be at least 5 characters");
     }
   };
 
   handleSubmit = event => {
-    console.log(event);
     const errorsArr = [];
     const newUser = {
       username: this.state.username,
       displayName: this.state.displayName,
-      password: this.state.password,
+      password: this.state.password
     };
     event.preventDefault();
     this.checkUsername(errorsArr);
@@ -67,9 +66,9 @@ class CreateAccount extends Component {
     if (errorsArr.length === 0) {
       this.props.fetchCreateUser(newUser);
     } else {
-      console.log(errorsArr);
+      console.log(this.props.errorMessage);
       this.setState({
-        errors: errorsArr,
+        errors: errorsArr
       });
     }
   };
@@ -118,7 +117,11 @@ class CreateAccount extends Component {
           <Button type="submit" onClick={this.handleSubmit} animated="fade">
             <Button.Content visible>Submit</Button.Content>
             <Button.Content hidden>
-              <Icon name="check" size="large" />
+              {this.state.errors ? (
+                <Icon name="dont" size="large" />
+              ) : (
+                <Icon name="check" size="large" />
+              )}
             </Button.Content>
           </Button>
         </Form>
@@ -127,12 +130,17 @@ class CreateAccount extends Component {
             ? this.state.errors.map(errorMsg => {
                 return (
                   <List.Item style={style} key={errorMsg}>
-                    {' '}
-                    {errorMsg}{' '}
+                    {" "}
+                    {errorMsg}{" "}
                   </List.Item>
                 );
               })
             : null}
+          {this.props.apiErrorMessage ? (
+            <List.Item style={style} key={this.props.apiErrorMessage}>
+              {this.props.apiErrorMessage}
+            </List.Item>
+          ) : null}
         </List>
       </React.Fragment>
     );
@@ -143,6 +151,7 @@ const mapStateToProps = state => {
   return {
     fetching: state.createUser.fetching,
     loggedIn: state.loginUser.loggedIn,
+    apiErrorMessage: state.createUser.errResMessage
   };
 };
 

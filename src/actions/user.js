@@ -8,6 +8,8 @@ export const GET_ALL_USER_INFO_REQUEST = 'GET_ALL_USER_INFO_REQUEST';
 export const GET_ALL_USER_INFO_RESPONSE = 'GET_ALL_USER_INFO_RESPONSE';
 export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
 export const LOGOUT_USER_RESPONSE = 'LOGOUT_USER_RESPONSE';
+export const CREATE_USER_ERROR = 'CREATE_USER_ERROR';
+export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR'
 export const UPDATE_USER_PASSWORD_REQUEST = 'UPDATE_USER_PASSWORD_REQUEST ';
 export const UPDATE_USER_PASSWORD_RESPONSE = 'UPDATE_USER_PASSWORD_RESPONSE ';
 export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST';
@@ -48,24 +50,44 @@ export function loginUserAsync(loginInfo) {
 
   return dispatch => {
     dispatch(loginUserRequest());
+    let loginErr = false
 
     fetch(API_URL + 'auth/login', initialOptions)
       .then(res => res.json())
       .then(data => {
-        dispatch(loginUserReceived(data));
-        console.log(data);
-        return data;
+        if(data.success === false) {
+          (dispatch(loginUserError()))
+          console.log(data)
+          return (loginErr = true)
+        } else {
+          console.log("shouldnt be here")
+          dispatch(loginUserReceived(data));
+          return data;
+        }
       })
       .then(data => {
-        dispatch(getAllUserInfoAsync(data.token, data.id));
-        return data;
+        if(loginErr===false) {
+          dispatch(getAllUserInfoAsync(data.id));
+          return data;
+        } else {
+          return
+        }
       })
-      .then(() => {
-        dispatch(push('/'));
+      .then((data) => {
+        if(loginErr===false) {
+          dispatch(push('/'));
+        } else {
+          return
+        }
       });
   };
 }
 
+export function loginUserError() {
+  return {
+    type: LOGIN_USER_ERROR
+  }
+}
 export function getAllUserInfoAsync(token, id) {
   const options = {
     method: 'GET',
@@ -80,9 +102,9 @@ export function getAllUserInfoAsync(token, id) {
     fetch(API_URL + 'users/' + id, options)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
-        dispatch(getAllUserInfoReceived(data.user));
-        return data;
+        const user = data.users.find(a => a.id === id);
+        dispatch(getAllUserInfoReceived(user));
+        return user;
       });
   };
 }
@@ -103,13 +125,22 @@ export function createUserAsync(newUser) {
     fetch(API_URL + 'auth/register', options)
       .then(res => res.json())
       .then(data => {
+        if (data.errors) {
+          const errResponse = data.errors[0].message
+          return (console.log(errResponse), dispatch(createUserError(errResponse)))
+        } else {
         dispatch(createUserReceived(data));
         dispatch(push('/login'));
-        return data;
+        return data;}
       });
   };
 }
 
+const createUserError = (errResponse) => {
+  return {
+    type: CREATE_USER_ERROR,
+    errorMessage: errResponse
+  }
 export function updateUserPasswordAsync(newPassword, token) {
   const options = {
     method: 'PATCH',
