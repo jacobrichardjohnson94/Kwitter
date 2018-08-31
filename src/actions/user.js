@@ -9,7 +9,7 @@ export const GET_ALL_USER_INFO_RESPONSE = 'GET_ALL_USER_INFO_RESPONSE';
 export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
 export const LOGOUT_USER_RESPONSE = 'LOGOUT_USER_RESPONSE';
 export const CREATE_USER_ERROR = 'CREATE_USER_ERROR';
-export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR'
+export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 export const UPDATE_USER_PASSWORD_REQUEST = 'UPDATE_USER_PASSWORD_REQUEST ';
 export const UPDATE_USER_PASSWORD_RESPONSE = 'UPDATE_USER_PASSWORD_RESPONSE ';
 export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST';
@@ -50,34 +50,34 @@ export function loginUserAsync(loginInfo) {
 
   return dispatch => {
     dispatch(loginUserRequest());
-    let loginErr = false
+    let loginErr = false;
 
     fetch(API_URL + 'auth/login', initialOptions)
       .then(res => res.json())
       .then(data => {
-        if(data.success === false) {
-          (dispatch(loginUserError()))
-          console.log(data)
-          return (loginErr = true)
+        if (data.success === false) {
+          dispatch(loginUserError());
+          console.log(data);
+          return (loginErr = true);
         } else {
-          console.log("shouldnt be here")
+          console.log('shouldnt be here');
           dispatch(loginUserReceived(data));
           return data;
         }
       })
       .then(data => {
-        if(loginErr===false) {
+        if (loginErr === false) {
           dispatch(getAllUserInfoAsync(data.id));
           return data;
         } else {
-          return
+          return;
         }
       })
-      .then((data) => {
-        if(loginErr===false) {
+      .then(data => {
+        if (loginErr === false) {
           dispatch(push('/'));
         } else {
-          return
+          return;
         }
       });
   };
@@ -85,8 +85,8 @@ export function loginUserAsync(loginInfo) {
 
 export function loginUserError() {
   return {
-    type: LOGIN_USER_ERROR
-  }
+    type: LOGIN_USER_ERROR,
+  };
 }
 export function getAllUserInfoAsync(token, id) {
   const options = {
@@ -126,21 +126,23 @@ export function createUserAsync(newUser) {
       .then(res => res.json())
       .then(data => {
         if (data.errors) {
-          const errResponse = data.errors[0].message
-          return (console.log(errResponse), dispatch(createUserError(errResponse)))
+          const errResponse = data.errors[0].message;
+          return console.log(errResponse), dispatch(createUserError(errResponse));
         } else {
-        dispatch(createUserReceived(data));
-        dispatch(push('/login'));
-        return data;}
+          dispatch(createUserReceived(data));
+          dispatch(push('/login'));
+          return data;
+        }
       });
   };
 }
 
-const createUserError = (errResponse) => {
+const createUserError = errResponse => {
   return {
     type: CREATE_USER_ERROR,
-    errorMessage: errResponse
-  }
+    errorMessage: errResponse,
+  };
+};
 export function updateUserPasswordAsync(newPassword, token) {
   const options = {
     method: 'PATCH',
