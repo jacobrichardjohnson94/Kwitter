@@ -3,7 +3,7 @@ export const GET_ALL_MESSAGES_RESPONSE = 'GET_ALL_MESSAGES_RESPONSE';
 export const GET_TEN_MESSAGES_REQUEST = 'GET_ALL_MESSAGES_REQUEST';
 export const GET_TEN_MESSAGES_RESPONSE = 'GET_ALL_MESSAGES_RESPONSE';
 
-const MESSAGE_API_URL = 'https://kwitter-api.herokuapp.com/messages';
+const MESSAGE_API_URL = 'https://kwitter-api.herokuapp.com/messages?limit=1000';
 
 export function fetchAllMessagesAsync() {
   return dispatch => {
@@ -27,6 +27,6 @@ const getAllMessagesRequest = () => {
 const getAllMessagesResponse = data => {
   return {
     type: GET_ALL_MESSAGES_RESPONSE,
-    messages: data
+    messages: data,
   };
 };

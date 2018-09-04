@@ -17,7 +17,7 @@ const style = {
     padding: '.2em',
     overflowX: 'hidden',
     overflowY: 'scroll',
-    background: '#F8F8F8'
+    background: '#F8F8F8',
   },
 };
 
@@ -26,7 +26,7 @@ class MessageList extends Component {
   componentDidMount() {
     this.props.fetchAllUsers();
   }
-  
+
   render() {
     const messages = this.props.messages;
     messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -57,6 +57,7 @@ class MessageList extends Component {
                       key={message.id}
                       id={message.id}
                       message={message.text || ''}
+                      likes={message.likes || [0]}
                       createdDate={this.formatDate(message.createdAt)}
                       displayName={displayName}
                       username={username}
@@ -77,6 +78,7 @@ class MessageList extends Component {
                       key={message.id}
                       id={message.id}
                       message={message.text || ''}
+                      likes={message.likes || [0]}
                       createdDate={message.createdAt}
                       displayName={allMessagesDisplayName}
                       username={allMessagesUsername}
@@ -93,7 +95,6 @@ class MessageList extends Component {
 const mapStateToProps = state => {
   return {
     loggedIn: state.loginUser.loggedIn,
-    messageList: state.getMessages.messages,
     userList: state.getAllUsers.userList,
     fetching: state.getAllUsers.fetching,
   };
