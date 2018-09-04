@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import './index.css';
 import App from './components/App';
@@ -8,13 +9,15 @@ import 'semantic-ui-css/semantic.min.css';
 import registerServiceWorker from './registerServiceWorker';
 import { ConnectedRouter } from 'connected-react-router';
 
-import { store, history } from './store.js';
+import { store, persistor, history } from './store.js';
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <App />
-    </ConnectedRouter>
+    <PersistGate loading={null} persistor={persistor}>
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
+    </PersistGate>
   </Provider>,
   document.getElementById('root')
 );
