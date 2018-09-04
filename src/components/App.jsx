@@ -44,7 +44,7 @@ class App extends Component {
         <PageHeader />
 
         <Container>
-          <Grid verticalAlign="middle" style={style.mainCol} columns={2}>
+          <Grid verticalAlign="middle" centered style={style.mainCol} columns={2}>
             {!this.props.loggedIn ? (
               <Grid.Column style={style.col1}>
                 <Segment>
@@ -58,10 +58,16 @@ class App extends Component {
             ) : null}
 
             <Grid.Column>
-              <Grid centered columns={1}>
-                {this.props.loggedIn ? <MessageInput /> : null}
-                <MessageList messages={this.props.messageList} />
-              </Grid>
+              {this.props.loggedIn ? (
+                <Grid centered>
+                  <MessageInput />
+                  <MessageList messages={this.props.messageList} />
+                </Grid>
+              ) : (
+                <Grid centered columns={1}>
+                  <MessageList messages={this.props.messageList} />
+                </Grid>
+              )}
             </Grid.Column>
           </Grid>
         </Container>
