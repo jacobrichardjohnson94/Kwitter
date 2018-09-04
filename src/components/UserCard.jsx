@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Grid, Icon, Segment, Card } from 'semantic-ui-react';
-
+import { getAllUserInfoAsync } from '../actions/user.js';
 import koalaUser from '../resources/images/koalaUserBrown.jpg';
 
 const formatDate = date => {
@@ -56,7 +56,19 @@ const mapStateToProps = state => {
   return {
     loggedInUser: state.loginUser.loggedInUser,
     loggedIn: state.loginUser.loggedIn,
+    token: state.loginUser.loggedInUser.token,
+    id: state.loginUser.loggedInUser.id,
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchAllUserInfo: (token, id) => dispatch(getAllUserInfoAsync(token, id)),
   };
 };
 
-export default withRouter(connect(mapStateToProps)(UserCard));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(UserCard)
+);
