@@ -60,17 +60,16 @@ export function loginUserAsync(loginInfo) {
           console.log(data);
           return (loginErr = true);
         } else {
-          console.log('shouldnt be here');
           dispatch(loginUserReceived(data));
           return data;
         }
       })
       .then(data => {
         if (loginErr === false) {
-          dispatch(getAllUserInfoAsync(data.id));
+          dispatch(getAllUserInfoAsync(data.token, data.id));
           return data;
         } else {
-          return;
+          console.log('error');
         }
       })
       .then(data => {
@@ -102,7 +101,7 @@ export function getAllUserInfoAsync(token, id) {
     fetch(API_URL + 'users/' + id, options)
       .then(res => res.json())
       .then(data => {
-        const user = data.users.find(a => a.id === id);
+        const user = data.user;
         dispatch(getAllUserInfoReceived(user));
         return user;
       });
