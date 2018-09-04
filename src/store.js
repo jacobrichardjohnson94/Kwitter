@@ -16,17 +16,14 @@ const rootReducer = combineReducers({
   getAllUsers: getAllUsersReducer,
 });
 
-export const history = createBrowserHistory();
-
 const persistConfig = {
   key: 'root',
   storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-export const store = createStore(
-  connectRouter(history)(persistedReducer),
-  composeEnhancers(applyMiddleware(routerMiddleware(history), thunk))
-);
+export const history = createBrowserHistory();
+const connectedRouter = connectRouter(history)(persistedReducer);
+const composedEnhancers = composeEnhancers(applyMiddleware(routerMiddleware(history), thunk));
+export const store = createStore(connectedRouter, composedEnhancers);
 export let persistor = persistStore(store);

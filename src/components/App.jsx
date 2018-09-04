@@ -3,12 +3,11 @@ import { Grid, Container, Segment } from 'semantic-ui-react';
 
 import PageHeader from './PageHeader.jsx';
 import MessageInput from './MessageInput';
-import SingleMessage from './SingleMessage';
 
 import MessageList from './MessageList.jsx';
 import CreateAccount from './CreateAccount.jsx';
 import UserCard from './UserCard.jsx';
-import UserInfo from './UserInfo.jsx';
+
 import LoginForm from './LoginForm';
 import Logout from './Logout';
 import { Switch, Route } from 'react-router';
@@ -16,10 +15,10 @@ import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import '../App.css';
-import AccountManagement from './UserCard';
+
 import ChangePw from './ChangePw';
 
-const bgColor = '#FCFCFC';
+// const bgColor = '#FCFCFC';
 const style = {
   mainCol: {
     height: '100%',
@@ -28,10 +27,7 @@ const style = {
   loginContainer: {
     marginTop: '4rem',
   },
-  segment: {
-    margin: '0',
-    padding: '.5em',
-  },
+
   loginLink: { color: 'black', textAlign: 'center' },
   grid: {
     marginTop: '1em',
@@ -42,9 +38,8 @@ class App extends Component {
     const initialPageComponents = (
       <React.Fragment>
         <PageHeader />
-
         <Container>
-          <Grid verticalAlign="middle" centered style={style.mainCol} columns={2}>
+          <Grid container verticalAlign="middle" centered style={style.mainCol} columns={2}>
             {!this.props.loggedIn ? (
               <Grid.Column style={style.col1}>
                 <Segment>

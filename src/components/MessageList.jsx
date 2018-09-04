@@ -21,6 +21,14 @@ const style = {
   },
 };
 
+const LoadingAnimation = () => {
+  return (
+    <Dimmer active>
+      <Loader>Loading</Loader>
+    </Dimmer>
+  );
+};
+
 class MessageList extends Component {
   formatDate = date => Date.parse(date);
   componentDidMount() {
@@ -28,63 +36,35 @@ class MessageList extends Component {
   }
 
   render() {
-    const messages = this.props.messages;
+    let messages = this.props.messages;
     messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-    let tenMessageList = messages.slice(0, 10);
-    let allMessageList = messages;
+    !this.props.loggedIn ? (messages = messages.slice(0, 10)) : null;
     return (
       <React.Fragment>
         <div style={style.container}>
-          {this.props.fetching ? (
-            <Dimmer active>
-              <Loader>Loading</Loader>
-            </Dimmer>
-          ) : null}
+          {this.props.fetching ? <LoadingAnimation /> : null}
           <List style={style.list} divided verticalAlign="middle">
-            {!this.props.loggedIn
-              ? tenMessageList.map(message => {
-                  let displayName;
-                  let username;
-                  this.props.userList.users.forEach(user => {
-                    if (message.userId === user.id) {
-                      displayName = user.displayName;
-                      username = user.username;
-                    }
-                  });
-                  return (
-                    <SingleMessage
-                      key={message.id}
-                      id={message.id}
-                      message={message.text || ''}
-                      likes={message.likes || [0]}
-                      createdDate={this.formatDate(message.createdAt)}
-                      displayName={displayName}
-                      username={username}
-                    />
-                  );
-                })
-              : allMessageList.map(message => {
-                  let allMessagesDisplayName;
-                  let allMessagesUsername;
-                  this.props.userList.users.forEach(user => {
-                    if (message.userId === user.id) {
-                      allMessagesDisplayName = user.displayName;
-                      allMessagesUsername = user.username;
-                    }
-                  });
-                  return (
-                    <SingleMessage
-                      key={message.id}
-                      id={message.id}
-                      message={message.text || ''}
-                      likes={message.likes || [0]}
-                      createdDate={message.createdAt}
-                      displayName={allMessagesDisplayName}
-                      username={allMessagesUsername}
-                    />
-                  );
-                })}
+            {messages.map(message => {
+              let displayName;
+              let username;
+              this.props.userList.users.forEach(user => {
+                if (message.userId === user.id) {
+                  displayName = user.displayName;
+                  username = user.username;
+                }
+              });
+              return (
+                <SingleMessage
+                  key={message.id}
+                  id={message.id}
+                  message={message.text || ''}
+                  likes={message.likes || []}
+                  createdDate={this.formatDate(message.createdAt)}
+                  displayName={displayName || ''}
+                  username={username || ''}
+                />
+              );
+            })}
           </List>
         </div>
       </React.Fragment>
