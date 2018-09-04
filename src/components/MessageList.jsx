@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import koalaIcon from '../resources/images/koalaIcon.svg';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
-import MessageInput from './MessageInput.jsx';
+import { getAllUserInfoAsync } from '../actions/user.js';
 
 const style = {
   list: {},
@@ -33,6 +33,8 @@ class MessageList extends Component {
   formatDate = date => Date.parse(date);
   componentDidMount() {
     this.props.fetchAllUsers();
+
+    this.props.fetchAllUserInfo(this.props.loggedInUser.token, this.props.loggedInUser.id);
   }
 
   render() {
@@ -75,6 +77,7 @@ class MessageList extends Component {
 const mapStateToProps = state => {
   return {
     loggedIn: state.loginUser.loggedIn,
+    loggedInUser: state.loginUser.loggedInUser,
     userList: state.getAllUsers.userList,
     fetching: state.getAllUsers.fetching,
   };
@@ -84,6 +87,7 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchAllUsers: () => dispatch(fetchAllUsersAsync()),
     fetchAllMessages: () => dispatch(fetchAllMessagesAsync()),
+    fetchAllUserInfo: (token, id) => dispatch(getAllUserInfoAsync(token, id)),
   };
 };
 
