@@ -13,6 +13,7 @@ import { getAllUserInfoAsync } from '../actions/user.js';
 const style = {
   list: {},
   container: {
+    borderRadius: '1rem',
     height: '70vh',
     padding: '.2em',
     overflowX: 'hidden',
