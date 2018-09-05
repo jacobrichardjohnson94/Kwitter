@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Grid, Container, Segment } from 'semantic-ui-react';
+import { Grid, Container, Segment, Responsive } from 'semantic-ui-react';
 
 import PageHeader from './PageHeader.jsx';
 import MessageInput from './MessageInput';
-
+import FooterPage from './FooterPage.jsx';
 import MessageList from './MessageList.jsx';
 import CreateAccount from './CreateAccount.jsx';
 import UserCard from './UserCard.jsx';
@@ -39,7 +39,14 @@ class App extends Component {
       <React.Fragment>
         <PageHeader />
         <Container>
-          <Grid container verticalAlign="middle" centered style={style.mainCol} columns={2}>
+          <Grid
+            container
+            verticalAlign="middle"
+            only="computer"
+            centered
+            style={style.mainCol}
+            columns={2}
+          >
             {!this.props.loggedIn ? (
               <Grid.Column style={style.col1}>
                 <Segment>
@@ -66,6 +73,7 @@ class App extends Component {
             </Grid.Column>
           </Grid>
         </Container>
+        <FooterPage />
       </React.Fragment>
     );
     const loginPage = (
@@ -103,7 +111,9 @@ class App extends Component {
             </Grid.Column>
 
             <Grid.Column floated="left">
-              <MessageList messages={this.props.loggedInUser.messages || []} />
+              <Grid centered container>
+                <MessageList messages={this.props.loggedInUser.messages || []} />
+              </Grid>
             </Grid.Column>
           </Grid.Row>
         </Grid>
