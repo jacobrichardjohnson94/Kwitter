@@ -9,6 +9,7 @@ import koalaIcon from '../resources/images/koalaIcon.svg';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import MessageInput from './MessageInput.jsx';
+import { likedMessage } from "../actions/messages";
 
 const style = {
   list: {},
@@ -26,11 +27,9 @@ class MessageList extends Component {
   componentDidMount() {
     this.props.fetchAllUsers();
   }
-  
   render() {
     const messages = this.props.messages;
     messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
     let tenMessageList = messages.slice(0, 10);
     let allMessageList = messages;
     return (
@@ -55,6 +54,7 @@ class MessageList extends Component {
                   return (
                     <SingleMessage
                       key={message.id}
+                      likes={message.likes.length}
                       id={message.id}
                       message={message.text || ''}
                       createdDate={this.formatDate(message.createdAt)}
@@ -75,11 +75,15 @@ class MessageList extends Component {
                   return (
                     <SingleMessage
                       key={message.id}
+                      likes={message.likes.length}
                       id={message.id}
                       message={message.text || ''}
                       createdDate={message.createdAt}
                       displayName={allMessagesDisplayName}
                       username={allMessagesUsername}
+                      addLike={this.props.addLike}
+                      token={this.props.token}
+                      messagesToChange={this.props.messageList}
                     />
                   );
                 })}
@@ -96,13 +100,18 @@ const mapStateToProps = state => {
     messageList: state.getMessages.messages,
     userList: state.getAllUsers.userList,
     fetching: state.getAllUsers.fetching,
+    token: state.loginUser.loggedInUser.token,
   };
 };
+
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchAllUsers: () => dispatch(fetchAllUsersAsync()),
     fetchAllMessages: () => dispatch(fetchAllMessagesAsync()),
+    addLike: (id, token, messagesToChange) => {
+      dispatch(likedMessage(id, token, messagesToChange));
+    }
   };
 };
 

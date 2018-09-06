@@ -60,7 +60,6 @@ export function loginUserAsync(loginInfo) {
           console.log(data);
           return (loginErr = true);
         } else {
-          console.log('shouldnt be here');
           dispatch(loginUserReceived(data));
           return data;
         }
@@ -127,7 +126,7 @@ export function createUserAsync(newUser) {
       .then(data => {
         if (data.errors) {
           const errResponse = data.errors[0].message;
-          return console.log(errResponse), dispatch(createUserError(errResponse));
+          return dispatch(createUserError(errResponse));
         } else {
           dispatch(createUserReceived(data));
           dispatch(push('/login'));
