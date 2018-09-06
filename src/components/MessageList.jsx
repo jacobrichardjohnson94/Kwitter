@@ -21,7 +21,6 @@ const style = {
     background: '#F8F8F8'
   },
 };
-
 class MessageList extends Component {
   formatDate = date => Date.parse(date);
   componentDidMount() {
@@ -66,6 +65,7 @@ class MessageList extends Component {
               : allMessageList.map(message => {
                   let allMessagesDisplayName;
                   let allMessagesUsername;
+                  
                   this.props.userList.users.forEach(user => {
                     if (message.userId === user.id) {
                       allMessagesDisplayName = user.displayName;

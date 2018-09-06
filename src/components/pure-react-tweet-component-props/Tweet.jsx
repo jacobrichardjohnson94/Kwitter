@@ -57,9 +57,9 @@ Tweet.propTypes = {
 const mapStateToProps = state => {
   return {
     token: state.loginUser.loggedInUser.token
+    
   };
 };
-
 
 export default connect(
   mapStateToProps

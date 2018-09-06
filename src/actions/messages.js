@@ -20,7 +20,7 @@ export function fetchAllMessagesAsync() {
   };
 }
 
-export function likedMessage(id, token, messagesToChange){
+export function likedMessage(id, token, likeId){
   let messageId = id
   const initialOpts = {
     method: 'POST',
@@ -37,19 +37,22 @@ export function likedMessage(id, token, messagesToChange){
   fetch(LIKE_API_URL, initialOpts)
     .then(res=>res.json())
     .then(data => {
-      console.log(messagesToChange.map(message => {
-        if(message.id === messageId) {
-          console.log('before',message.likes)
-          let newLikesArray = message.likes
-          newLikesArray.push(data.like)
-          console.log(newLikesArray)
-          console.log('after',message.likes)
-          return(dispatch(likedMessageResponse(data, messageId,newLikesArray)))
-        } else return
-      }))
-      console.log('hit', data)
-    })
-  }
+          console.log(data)
+          if(data.error){
+            const initialOpt = {
+              method: 'DELETE',
+              headers: {
+                Accept: 'application/json',
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'application/json'
+              }
+            }
+            return fetch(LIKE_API_URL +'/'+ likeId, initialOpt)
+          } else {
+            return(dispatch(fetchAllMessagesAsync()))
+          }
+      })
+    }
 }
 
 const likedMessageResponse = (data) => {
