@@ -13,10 +13,9 @@ import Logout from './Logout';
 import { Switch, Route } from 'react-router';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ChangePw from './ChangePw';
 
 import '../App.css';
-
-import ChangePw from './ChangePw';
 
 // const bgColor = '#FCFCFC';
 const style = {
@@ -35,17 +34,16 @@ const style = {
 };
 class App extends Component {
   render() {
-    const initialPageComponents = (
+    const rootLayoutDesktop = (
       <React.Fragment>
         <PageHeader />
         <Container>
           <Grid
             container
             verticalAlign="middle"
-            only="computer"
             centered
             style={style.mainCol}
-            columns={2}
+            columns={!this.props.loggedIn ? 2 : null}
           >
             {!this.props.loggedIn ? (
               <Grid.Column style={style.col1}>
@@ -60,15 +58,14 @@ class App extends Component {
             ) : null}
 
             <Grid.Column>
-              {this.props.loggedIn ? (
-                <Grid centered>
-                  <MessageInput />
-                  <MessageList messages={this.props.messageList} />
-                </Grid>
-              ) : (
-                <Grid centered columns={1}>
-                  <MessageList messages={this.props.messageList} />
-                </Grid>
+              <Grid centered columns={2}>
+                {this.props.loggedIn ? (
+                  <div style={{ paddingTop: '6em' }}>
+                    <MessageInput />
+                  </div>
+                ) : null}
+                <MessageList messages={this.props.messageList} />
+              </Grid>
               )}
             </Grid.Column>
           </Grid>
@@ -127,7 +124,7 @@ class App extends Component {
     );
     return (
       <Switch>
-        <Route exact path="/" render={() => initialPageComponents} />
+        <Route exact path="/" render={() => rootLayoutDesktop} />
         <Route exact path="/login" render={() => loginPage} />
         <Route exact path="/logout" render={() => logoutPage} />
         <Route exact path="/account" render={() => accountManagementPage} />
