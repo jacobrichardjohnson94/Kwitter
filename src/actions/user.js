@@ -126,7 +126,8 @@ export function createUserAsync(newUser) {
       .then(data => {
         if (data.errors) {
           const errResponse = data.errors[0].message;
-          return console.log(errResponse), dispatch(createUserError(errResponse));
+          dispatch(createUserError(errResponse));
+          return console.log(errResponse);
         } else {
           dispatch(createUserReceived(data));
           dispatch(push('/login'));

@@ -35,7 +35,8 @@ class MessageList extends Component {
   componentDidMount() {
     this.props.fetchAllUsers();
 
-    this.props.fetchAllUserInfo(this.props.loggedInUser.token, this.props.loggedInUser.id);
+    if (this.props.loggedIn)
+      this.props.fetchAllUserInfo(this.props.loggedInUser.token, this.props.loggedInUser.id);
   }
 
   render() {

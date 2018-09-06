@@ -32,23 +32,23 @@ class CreateAccount extends Component {
 
   checkUsername = errorsArr => {
     if (this.state.username.length < 5) {
-      errorsArr.push("Username must be between 5-15 characters");
+      errorsArr.push('Username must be between 5-15 characters');
     } else if (this.state.username.length > 15) {
-      errorsArr.push("Username must be between 5-15 characters");
+      errorsArr.push('Username must be between 5-15 characters');
     }
   };
 
   checkDisplayName = errorsArr => {
     if (this.state.displayName.length < 5) {
-      errorsArr.push("Display name must be between 5-15 characters");
+      errorsArr.push('Display name must be between 5-15 characters');
     } else if (this.state.displayName.length > 15) {
-      errorsArr.push("Display name must be between 5-15 characters");
+      errorsArr.push('Display name must be between 5-15 characters');
     }
   };
 
   checkPassword = errorsArr => {
     if (this.state.password.length < 5) {
-      errorsArr.push("Password must be at least 5 characters");
+      errorsArr.push('Password must be at least 5 characters');
     }
   };
 
@@ -57,7 +57,7 @@ class CreateAccount extends Component {
     const newUser = {
       username: this.state.username,
       displayName: this.state.displayName,
-      password: this.state.password
+      password: this.state.password,
     };
     event.preventDefault();
     this.checkUsername(errorsArr);
@@ -68,7 +68,7 @@ class CreateAccount extends Component {
     } else {
       console.log(this.props.errorMessage);
       this.setState({
-        errors: errorsArr
+        errors: errorsArr,
       });
     }
   };
@@ -90,7 +90,7 @@ class CreateAccount extends Component {
             label="Enter Username"
             placeholder="Username"
           >
-            <Icon name="id badge" />
+            <Icon name="user" />
             <input />
           </Form.Input>
 
@@ -101,7 +101,7 @@ class CreateAccount extends Component {
             label="Enter Display Name"
             placeholder="Display Name"
           >
-            <Icon name="id card" />
+            <Icon name="user outline" />
             <input />
           </Form.Input>
           <Form.Input
@@ -114,15 +114,8 @@ class CreateAccount extends Component {
             <Icon name="barcode" />
             <input />
           </Form.Input>
-          <Button type="submit" onClick={this.handleSubmit} animated="fade">
-            <Button.Content visible>Submit</Button.Content>
-            <Button.Content hidden>
-              {this.state.errors ? (
-                <Icon name="dont" size="large" />
-              ) : (
-                <Icon name="check" size="large" />
-              )}
-            </Button.Content>
+          <Button type="submit" onClick={this.handleSubmit}>
+            Submit
           </Button>
         </Form>
         <List name="ui list">
@@ -130,8 +123,8 @@ class CreateAccount extends Component {
             ? this.state.errors.map(errorMsg => {
                 return (
                   <List.Item style={style} key={errorMsg}>
-                    {" "}
-                    {errorMsg}{" "}
+                    {' '}
+                    {errorMsg}{' '}
                   </List.Item>
                 );
               })
@@ -151,7 +144,7 @@ const mapStateToProps = state => {
   return {
     fetching: state.createUser.fetching,
     loggedIn: state.loginUser.loggedIn,
-    apiErrorMessage: state.createUser.errResMessage
+    apiErrorMessage: state.createUser.errResMessage,
   };
 };
 

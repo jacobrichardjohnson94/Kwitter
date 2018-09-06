@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Grid, Container, Segment } from 'semantic-ui-react';
+import { Grid, Container, Segment, Responsive } from 'semantic-ui-react';
 
 import PageHeader from './PageHeader.jsx';
 import MessageInput from './MessageInput';
-
+import FooterPage from './FooterPage.jsx';
 import MessageList from './MessageList.jsx';
 import CreateAccount from './CreateAccount.jsx';
 import UserCard from './UserCard.jsx';
@@ -15,9 +15,10 @@ import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AboutMe from './AboutMe.jsx'
 
-import '../App.css';
-
 import ChangePw from './ChangePw';
+
+
+import '../App.css';
 
 // const bgColor = '#FCFCFC';
 const style = {
@@ -36,11 +37,17 @@ const style = {
 };
 class App extends Component {
   render() {
-    const initialPageComponents = (
+    const rootLayoutDesktop = (
       <React.Fragment>
         <PageHeader />
         <Container>
-          <Grid container verticalAlign="middle" centered style={style.mainCol} columns={2}>
+          <Grid
+            container
+            verticalAlign="middle"
+            centered
+            style={style.mainCol}
+            columns={!this.props.loggedIn ? 2 : null}
+          >
             {!this.props.loggedIn ? (
               <Grid.Column style={style.col1}>
                 <Segment>
@@ -54,19 +61,19 @@ class App extends Component {
             ) : null}
 
             <Grid.Column>
-              {this.props.loggedIn ? (
-                <Grid centered>
-                  <MessageInput />
-                  <MessageList messages={this.props.messageList} />
-                </Grid>
-              ) : (
-                <Grid centered columns={1}>
-                  <MessageList messages={this.props.messageList} />
-                </Grid>
+              <Grid centered columns={2}>
+                {this.props.loggedIn ? (
+                  <div style={{ paddingTop: '6em' }}>
+                    <MessageInput />
+                  </div>
+                ) : null}
+                <MessageList messages={this.props.messageList} />
+              </Grid>
               )}
             </Grid.Column>
           </Grid>
         </Container>
+        <FooterPage />
       </React.Fragment>
     );
     const loginPage = (
@@ -110,9 +117,13 @@ class App extends Component {
             </Grid.Column>
 
             <Grid.Column floated="left">
-            <Grid centered>
-              <MessageList messages={this.props.loggedInUser.messages || []} />
-            </Grid>
+
+     
+
+              <Grid centered container>
+                <MessageList messages={this.props.loggedInUser.messages || []} />
+              </Grid>
+
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -126,7 +137,7 @@ class App extends Component {
     );
     return (
       <Switch>
-        <Route exact path="/" render={() => initialPageComponents} />
+        <Route exact path="/" render={() => rootLayoutDesktop} />
         <Route exact path="/login" render={() => loginPage} />
         <Route exact path="/logout" render={() => logoutPage} />
         <Route exact path="/account" render={() => accountManagementPage} />
