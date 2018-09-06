@@ -13,6 +13,7 @@ import Logout from './Logout';
 import { Switch, Route } from 'react-router';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import AboutMe from './AboutMe.jsx'
 
 import '../App.css';
 
@@ -99,11 +100,19 @@ class App extends Component {
                 <Segment>
                   <UserCard />
                 </Segment>
+                {/* <Segment> */}
+                <Grid.Row>
+
+                  <AboutMe/>
+                </Grid.Row>
+                {/* </Segment> */}
               </Grid>
             </Grid.Column>
 
             <Grid.Column floated="left">
+            <Grid centered>
               <MessageList messages={this.props.loggedInUser.messages || []} />
+            </Grid>
             </Grid.Column>
           </Grid.Row>
         </Grid>

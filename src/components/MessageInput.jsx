@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Icon, Input, Card } from "semantic-ui-react";
+import { Icon, Input, Card, TextArea } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchAllMessagesAsync } from "../actions/messages.js";
 
 const cardStyle = {
-  width: "23em"
+  width: "25em"
 };
 
 class MessageInput extends Component {
@@ -41,11 +41,12 @@ class MessageInput extends Component {
     return (
       <Card style={cardStyle}>
         <Card.Content>
-          <Card.Header>Post to the Timeline</Card.Header>
+          <Card.Header style={{marginBottom: '8px'}}>Post to the Timeline</Card.Header>
           <Input
             onChange={this.handleMessageChange}
             value={this.state.message}
             onKeyPress={this.submitMessageOnEvent}
+            // style={{width: '100%', borderRadius: '5%'}}
             fluid
             size="large"
             icon={<Icon name="edit" link onClick={this.submitMessageOnEvent} />}
