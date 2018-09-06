@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Image } from 'semantic-ui-react';
 import koalaIcon from '../resources/images/koalaUser.jpg';
-import Tweet from './pure-react-tweet-component-props/Tweet.js';
+import Tweet from './pure-react-tweet-component-props/Tweet.jsx';
 
 const style = {
   textAlignRight: {
@@ -24,7 +24,9 @@ const getLength = arr => {
 };
 function SingleMessage(props) {
   let tweetInfo = {
+    id: props.id,
     message: props.message,
+    messagesToChange: props.messagesToChange,
     gravatar: koalaIcon,
     author: {
       handle: props.username,
@@ -33,8 +35,12 @@ function SingleMessage(props) {
     likes: getLength(props.likes),
     retweets: null,
     timestamp: props.createdDate,
+    addLike: props.addLike,
+    token: props.token
   };
-  return <Tweet tweet={tweetInfo} />;
+return <Tweet tweet={tweetInfo} />;
 }
+
+
 
 export default SingleMessage;

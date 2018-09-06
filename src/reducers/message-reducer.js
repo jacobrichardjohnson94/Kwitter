@@ -3,11 +3,12 @@ import {
   GET_ALL_MESSAGES_RESPONSE,
   GET_TEN_MESSAGES_REQUEST,
   GET_TEN_MESSAGES_RESPONSE,
-} from '../actions/messages.js';
+  LIKED_MESSAGE_RESPONSE
+} from "../actions/messages.js";
 
 const initialMessagesState = {
   fetching: false,
-  messages: [],
+  messages: []
 };
 
 export function getMessagesReducer(state = initialMessagesState, action) {
@@ -15,12 +16,21 @@ export function getMessagesReducer(state = initialMessagesState, action) {
     case GET_ALL_MESSAGES_REQUEST:
       return {
         ...state,
-        fetching: true,
+        fetching: true
       };
     case GET_ALL_MESSAGES_RESPONSE:
       return {
         messages: action.messages,
-        fetching: false,
+        fetching: false
+      };
+    case LIKED_MESSAGE_RESPONSE:
+      console.log(action.payload.like.messageId);
+      return {
+        ...state,
+        // messages: {
+        //   ...state.messages,
+        //   likes: 
+        // }
       };
     // case GET_TEN_MESSAGES_REQUEST:
     //   return {

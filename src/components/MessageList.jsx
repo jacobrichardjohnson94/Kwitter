@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import koalaIcon from '../resources/images/koalaIcon.svg';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
+import MessageInput from './MessageInput.jsx';
+import { likedMessage } from "../actions/messages";
 import { getAllUserInfoAsync } from '../actions/user.js';
 
 const style = {
@@ -38,7 +40,6 @@ class MessageList extends Component {
     if (this.props.loggedIn)
       this.props.fetchAllUserInfo(this.props.loggedInUser.token, this.props.loggedInUser.id);
   }
-
   render() {
     let messages = this.props.messages;
     messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -66,6 +67,9 @@ class MessageList extends Component {
                   createdDate={this.formatDate(message.createdAt)}
                   displayName={displayName || ''}
                   username={username || ''}
+                  addLike={this.props.addLike}
+                  token={this.props.token}
+                  messagesToChange={this.props.messageList}
                 />
               );
             })}
@@ -82,13 +86,18 @@ const mapStateToProps = state => {
     loggedInUser: state.loginUser.loggedInUser,
     userList: state.getAllUsers.userList,
     fetching: state.getAllUsers.fetching,
+    token: state.loginUser.loggedInUser.token,
   };
 };
+
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchAllUsers: () => dispatch(fetchAllUsersAsync()),
     fetchAllMessages: () => dispatch(fetchAllMessagesAsync()),
+    addLike: (id, token, messagesToChange) => {
+      dispatch(likedMessage(id, token, messagesToChange));
+    },
     fetchAllUserInfo: (token, id) => dispatch(getAllUserInfoAsync(token, id)),
   };
 };
