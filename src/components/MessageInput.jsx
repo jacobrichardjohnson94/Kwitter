@@ -1,39 +1,39 @@
-import React, { Component } from "react";
-import { Icon, Input, Card } from "semantic-ui-react";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { fetchAllMessagesAsync } from "../actions/messages.js";
+import React, { Component } from 'react';
+import { Icon, Input, Card } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchAllMessagesAsync } from '../actions/messages.js';
 
 const cardStyle = {
-  width: "23em"
+  width: '23em',
 };
 
 class MessageInput extends Component {
   state = {
-    message: ""
+    message: '',
   };
 
   handleMessageChange = event => this.setState({ message: event.target.value });
 
   submitMessageOnEvent = event => {
-    if (event.key === "Enter" || event.type === "click") {
+    if (event.key === 'Enter' || event.type === 'click') {
       const body = {
-        text: this.state.message
+        text: this.state.message,
       };
-      fetch("https://kwitter-api.herokuapp.com/messages", {
-        method: "POST",
+      fetch('https://kwitter-api.herokuapp.com/messages', {
+        method: 'POST',
         headers: {
           Authorization: `Bearer ${this.props.loggedInUserAuthKey}`,
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
       })
         .then(res => res.json())
         .then(data => {
           this.props.fetchAllMessages();
         });
-      this.setState({ message: "" });
-      event.target.value = "";
+      this.setState({ message: '' });
+      event.target.value = '';
     }
   };
 
@@ -41,7 +41,9 @@ class MessageInput extends Component {
     return (
       <Card style={cardStyle}>
         <Card.Content>
-          <Card.Header>Post to the Timeline</Card.Header>
+          <Card.Header style={{ marginBottom: '.5em' }}>
+            <h4>Say Something...</h4>
+          </Card.Header>
           <Input
             onChange={this.handleMessageChange}
             value={this.state.message}
@@ -59,7 +61,7 @@ class MessageInput extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchAllMessages: () => dispatch(fetchAllMessagesAsync())
+    fetchAllMessages: () => dispatch(fetchAllMessagesAsync()),
   };
 };
 
@@ -68,7 +70,7 @@ const mapStateToProps = state => {
     loggedInUserAuthKey: state.loginUser.loggedInUser.token,
     messageList: state.getMessages.messages,
     userList: state.getAllUsers.userList,
-    fetching: state.getAllUsers.fetching
+    fetching: state.getAllUsers.fetching,
   };
 };
 export default withRouter(
