@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { Icon, Input, Card, TextArea } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
@@ -7,6 +8,7 @@ import { fetchAllMessagesAsync } from '../actions/messages.js';
 const cardStyle = {
   width: '23em',
   height: '11em',
+
 };
 const inputStyle = {};
 
@@ -42,6 +44,7 @@ class MessageInput extends Component {
   render() {
     return (
       <Card style={cardStyle}>
+
         <Card.Content
           style={{
             display: 'flex',
@@ -53,11 +56,13 @@ class MessageInput extends Component {
             <h4>Say Something...</h4>
           </Card.Header>
 
+
           <Input
             style={inputStyle}
             onChange={this.handleMessageChange}
             value={this.state.message}
             onKeyPress={this.submitMessageOnEvent}
+            // style={{width: '100%', borderRadius: '5%'}}
             fluid
             size="large"
             icon={<Icon name="edit" link onClick={this.submitMessageOnEvent} />}
