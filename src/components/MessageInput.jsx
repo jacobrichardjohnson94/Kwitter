@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Icon, Input, Card } from 'semantic-ui-react';
+import { Icon, Input, Card, TextArea } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchAllMessagesAsync } from '../actions/messages.js';
 
 const cardStyle = {
   width: '23em',
+  height: '11em',
 };
+const inputStyle = {};
 
 class MessageInput extends Component {
   state = {
@@ -29,7 +31,7 @@ class MessageInput extends Component {
         body: JSON.stringify(body),
       })
         .then(res => res.json())
-        .then(data => {
+        .then(() => {
           this.props.fetchAllMessages();
         });
       this.setState({ message: '' });
@@ -40,11 +42,19 @@ class MessageInput extends Component {
   render() {
     return (
       <Card style={cardStyle}>
-        <Card.Content>
+        <Card.Content
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+          }}
+        >
           <Card.Header style={{ marginBottom: '.5em' }}>
             <h4>Say Something...</h4>
           </Card.Header>
+
           <Input
+            style={inputStyle}
             onChange={this.handleMessageChange}
             value={this.state.message}
             onKeyPress={this.submitMessageOnEvent}

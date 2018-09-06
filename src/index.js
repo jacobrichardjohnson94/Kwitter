@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
+import App from './components/App';
+import { Provider } from 'react-redux';
+import 'semantic-ui-css/semantic.min.css';
 import './index.css';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-import App from './components/App';
-import { Provider } from 'react-redux';
-import 'semantic-ui-css/semantic.min.css';
 import registerServiceWorker from './registerServiceWorker';
 import { ConnectedRouter } from 'connected-react-router';
 
