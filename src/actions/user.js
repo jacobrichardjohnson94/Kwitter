@@ -66,10 +66,10 @@ export function loginUserAsync(loginInfo) {
       })
       .then(data => {
         if (loginErr === false) {
-          dispatch(getAllUserInfoAsync(data.id));
+          dispatch(getAllUserInfoAsync(data.token, data.id));
           return data;
         } else {
-          return;
+          console.log('error');
         }
       })
       .then(data => {
@@ -101,7 +101,7 @@ export function getAllUserInfoAsync(token, id) {
     fetch(API_URL + 'users/' + id, options)
       .then(res => res.json())
       .then(data => {
-        const user = data.users.find(a => a.id === id);
+        const user = data.user;
         dispatch(getAllUserInfoReceived(user));
         return user;
       });
@@ -126,7 +126,8 @@ export function createUserAsync(newUser) {
       .then(data => {
         if (data.errors) {
           const errResponse = data.errors[0].message;
-          return dispatch(createUserError(errResponse));
+          dispatch(createUserError(errResponse));
+          return console.log(errResponse);
         } else {
           dispatch(createUserReceived(data));
           dispatch(push('/login'));

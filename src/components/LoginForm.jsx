@@ -1,40 +1,30 @@
-import React from "react";
-import { Component } from "react";
-import {
-  Header,
-  Icon,
-  Button,
-  Form,
-  Dimmer,
-  Loader,
-  List
-} from "semantic-ui-react";
+import React from 'react';
+import { Component } from 'react';
+import { Header, Icon, Button, Form, Dimmer, Loader, List } from 'semantic-ui-react';
 
-import { connect } from "react-redux";
-import { loginUserAsync, getAllUserInfoAsync } from "../actions/user";
-import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
+import { loginUserAsync, getAllUserInfoAsync } from '../actions/user';
+import { withRouter } from 'react-router-dom';
 
 const style = {
-  color: "#B03060"
+  color: '#B03060',
 };
 
 class LoginForm extends Component {
   state = {
-    username: "",
-    password: ""
+    username: '',
+    password: '',
   };
 
-  handleUsernameChange = event =>
-    this.setState({ username: event.target.value });
-  handlePasswordChange = event =>
-    this.setState({ password: event.target.value });
+  handleUsernameChange = event => this.setState({ username: event.target.value });
+  handlePasswordChange = event => this.setState({ password: event.target.value });
 
   handleSubmit = event => {
     event.preventDefault();
     // console.log('this is the state: ', this.state)
     const userInfo = {
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
     };
     const user = this.props.loggedInUser;
     this.props.fetchLoginUser(userInfo);
@@ -57,7 +47,7 @@ class LoginForm extends Component {
             label="Enter Username"
             placeholder="Username"
           >
-            <Icon name="id badge" />
+            <Icon name="user" />
             <input />
           </Form.Input>
 
@@ -72,15 +62,8 @@ class LoginForm extends Component {
             <input />
           </Form.Input>
 
-          <Button type="submit" onClick={this.handleSubmit} animated="fade">
-            <Button.Content visible>Submit</Button.Content>
-            <Button.Content hidden>
-              {this.props.loginErrors ? (
-                <Icon name="dont" size="large" />
-              ) : (
-                <Icon name="check" size="large" />
-              )}
-            </Button.Content>
+          <Button type="submit" onClick={this.handleSubmit}>
+            Submit
           </Button>
         </Form>
         <List style={style} key={this.props.loginErrors}>
@@ -95,7 +78,7 @@ const mapStateToProps = state => {
     loggedInUser: state.loginUser.loggedInUser,
 
     fetching: state.loginUser.fetching,
-    loginErrors: state.loginUser.loginError
+    loginErrors: state.loginUser.loginError,
   };
 };
 const mapDispatchToProps = dispatch => {

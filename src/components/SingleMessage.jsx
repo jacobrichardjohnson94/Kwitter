@@ -19,7 +19,9 @@ const style = {
     verticalAlign: 'top',
   },
 };
-
+const getLength = arr => {
+  return arr.length;
+};
 function SingleMessage(props) {
   let tweetInfo = {
     id: props.id,
@@ -30,7 +32,7 @@ function SingleMessage(props) {
       handle: props.username,
       name: props.displayName,
     },
-    likes: props.likes,
+    likes: getLength(props.likes),
     retweets: null,
     timestamp: props.createdDate,
     addLike: props.addLike,
