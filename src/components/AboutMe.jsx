@@ -16,12 +16,10 @@ class AboutMe extends Component {
   state = {
     editing: false,
     textInput: "",
-    aboutMeResponse: ""
+    aboutMeResponse: this.props.loggedInUserAbout
   };
 
-  // componentWillMount(){
-  //   fetchAboutMeAsync()
-  // }
+  
 
   handleEditButton = () => this.setState({ editing: true });
   handleSubmitButton = event => {
@@ -37,25 +35,24 @@ class AboutMe extends Component {
       },
       body: JSON.stringify(body)
     })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        this.setState({editing: false, aboutMeResponse: data.user.about})
+    .then(res => res.json())
+    .then(data => {
+      this.setState({editing: false, aboutMeResponse: data.user.about})
       });
-  };
+    };
 
   handleTextInput = event => this.setState({ textInput: event.target.value });
 
   render() {
-    console.log(this.state.aboutMeResponse);
+    // console.log(this.props.loggedInUserAbout)
     return (
       <Container text>
-        <Segment centered style={{ width: "42rem" }}>
+        <Segment centered='true' style={{ width: "42rem" }}>
           <Header as="h2">About Me</Header>
           <React.Fragment>
             {!this.state.editing ? (
               <p style={{ fontSize: "16px", color: "black" }}>
-              {this.state.aboutMeResponse !== '' ? this.state.aboutMeResponse : 'This is where your bio will appear!'}
+              {this.state.aboutMeResponse !== '' ? this.state.aboutMeResponse : <p style={{color: 'gray'}}>This is where your bio will appear!</p>}
               
               </p>
             ) : (
@@ -92,6 +89,8 @@ class AboutMe extends Component {
 const mapStateToProps = state => {
   return {
     loggedInUserAuthKey: state.loginUser.loggedInUser.token,
+    loggedInUserUserId: state.loginUser.loggedInUser.id,
+    loggedInUserAbout: state.loginUser.loggedInUser.about
   };
 };
 
