@@ -52,7 +52,7 @@ class AboutMe extends Component {
           <React.Fragment>
             {!this.state.editing ? (
               <p style={{ fontSize: "16px", color: "black" }}>
-              {this.state.aboutMeResponse !== '' ? this.state.aboutMeResponse : 'This is where your bio will appear!'}
+              {this.state.aboutMeResponse !== '' ? this.state.aboutMeResponse : <p style={{color: 'gray'}}>This is where your bio will appear!</p>}
               
               </p>
             ) : (
