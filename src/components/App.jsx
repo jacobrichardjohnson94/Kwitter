@@ -23,6 +23,7 @@ import '../App.css';
 const style = {
   mainCol: {
     height: '100%',
+
     marginTop: '4rem',
   },
   loginContainer: {
@@ -35,7 +36,51 @@ const style = {
   },
 };
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      width: window.innerWidth,
+    };
+  }
+  componentWillMount() {
+    window.addEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  // make sure to remove the listener
+  // when the component is not mounted anymore
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
+  };
   render() {
+    const isMobile = window.innerWidth <= 500;
+
+    const rootLayoutMobile = (
+      <React.Fragment>
+        <PageHeader headerWidth={isMobile ? '110%' : '100%'} />
+        <Grid verticalAlign="middle" centered style={style.mainCol} columns={1}>
+          {!this.props.loggedIn ? (
+            <React.Fragment>
+              <CreateAccount />
+
+              <p style={style.loginLink}>
+                Already Have An Account?
+                <Link to="/login"> Login</Link>
+              </p>
+            </React.Fragment>
+          ) : (
+            <div>
+              <MessageInput />
+            </div>
+          )}
+          <MessageList messages={this.props.messageList} />
+        </Grid>
+        )} ) :
+      </React.Fragment>
+    );
     const rootLayoutDesktop = (
       <React.Fragment>
         <PageHeader />
@@ -72,7 +117,7 @@ class App extends Component {
             </Grid.Column>
           </Grid>
         </Container>
-        <FooterPage />
+        <FooterPage /> ) :
       </React.Fragment>
     );
     const loginPage = (
@@ -83,7 +128,7 @@ class App extends Component {
             <LoginForm />
           </Segment>
         </Container>
-        <FooterPage />
+        {!isMobile ? <FooterPage /> : null}
       </React.Fragment>
     );
     const logoutPage = (
@@ -94,10 +139,10 @@ class App extends Component {
             <Logout />
           </Segment>
         </Container>
-        <FooterPage />
+        {!isMobile ? <FooterPage /> : null}
       </React.Fragment>
     );
-    const accountManagementPage = (
+    const accountManagementPageDesktop = (
       <React.Fragment>
         <PageHeader />
 
@@ -125,22 +170,52 @@ class App extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <FooterPage />
+        {!isMobile ? <FooterPage /> : null}
+      </React.Fragment>
+    );
+    const accountManagementPageMobile = (
+      <React.Fragment>
+        <PageHeader />
+
+        <Grid container centered columns={1} style={style.grid}>
+          <Grid.Row>
+            <Grid.Column floated="left">
+              <Grid centered>
+                <Segment>
+                  <UserCard />
+                </Segment>
+                {/* <Segment> */}
+                <Grid.Row>
+                  edit ? <AboutMe />
+                </Grid.Row>
+                {/* </Segment> */}
+              </Grid>
+            </Grid.Column>
+
+            {this.props.loggedIn ? (
+              <MessageList messages={this.props.loggedInUser.messages || []} />
+            ) : null}
+          </Grid.Row>
+        </Grid>
       </React.Fragment>
     );
     const changePwPage = (
       <React.Fragment>
         <PageHeader />
         <ChangePw />
-        <FooterPage />
+        {!isMobile ? <FooterPage /> : null}
       </React.Fragment>
     );
     return (
       <Switch>
-        <Route exact path="/" render={() => rootLayoutDesktop} />
+        <Route exact path="/" render={() => (!isMobile ? rootLayoutDesktop : rootLayoutMobile)} />
         <Route exact path="/login" render={() => loginPage} />
         <Route exact path="/logout" render={() => logoutPage} />
-        <Route exact path="/account" render={() => accountManagementPage} />
+        <Route
+          exact
+          path="/account"
+          render={() => (!isMobile ? accountManagementPageDesktop : accountManagementPageMobile)}
+        />
         <Route exact path="/changepw" render={() => changePwPage} />
       </Switch>
     );

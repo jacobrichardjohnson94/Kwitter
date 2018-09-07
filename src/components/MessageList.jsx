@@ -9,7 +9,7 @@ import koalaIcon from '../resources/images/koalaIcon.svg';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import MessageInput from './MessageInput.jsx';
-import { likedMessage } from "../actions/messages";
+import { likedMessage } from '../actions/messages';
 import { getAllUserInfoAsync } from '../actions/user.js';
 
 const style = {
@@ -46,10 +46,10 @@ class MessageList extends Component {
     messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     !this.props.loggedIn ? (messages = messages.slice(0, 10)) : null;
     return (
-      <Segment style={{width: '30rem'}}>
+      <Segment style={{ width: '30rem' }}>
         <div style={style.container}>
           {this.props.fetching ? <LoadingAnimation /> : null}
-          <List style={style.list} divided verticalAlign="middle" horizontalAlign='middle'>
+          <List style={style.list} divided verticalAlign="middle">
             {messages.map(message => {
               let displayName;
               let username;
@@ -90,7 +90,6 @@ const mapStateToProps = state => {
     token: state.loginUser.loggedInUser.token,
   };
 };
-
 
 const mapDispatchToProps = dispatch => {
   return {
