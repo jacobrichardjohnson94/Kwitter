@@ -10,7 +10,6 @@ const headerColor = '#6CC2B6';
 const style = {
   header: {
     backgroundColor: headerColor,
-    width: '100%',
   },
   font: {
     color: '#FFFFFF ',
@@ -29,6 +28,9 @@ const style = {
   col: {
     width: '100%',
   },
+  mobileCol: {
+    paddingLeft: '8em',
+  },
   koalaIcon: {
     minWidth: '3rem',
   },
@@ -37,7 +39,7 @@ class PageHeader extends Component {
   render() {
     return (
       <React.Fragment>
-        <div style={style.header}>
+        <div style={{ backgroundColor: headerColor, width: this.props.headerWidth }}>
           <Segment style={style.header} clearing>
             <Grid style={style.col} container relaxed verticalAlign="middle">
               <Grid.Row style={style.grid}>
@@ -56,7 +58,7 @@ class PageHeader extends Component {
                     </Link>
                   </h1>
                 </Grid.Column>
-                {/* <Grid.Column width={8} /> */}
+
                 <Grid.Column style={style.col} floated="right" only="computer" width={1}>
                   <h1 style={style.font}>
                     {this.props.loggedIn ? (
@@ -79,6 +81,16 @@ class PageHeader extends Component {
                       </Link>
                     )}
                   </h2>
+                </Grid.Column>
+
+                <Grid.Column style={style.mobileCol} only="tablet mobile" width={1}>
+                  <h1 style={style.font}>
+                    {this.props.loggedIn ? (
+                      <Link style={style.font} to="/account">
+                        <Icon size="small" name="user" />
+                      </Link>
+                    ) : null}
+                  </h1>
                 </Grid.Column>
               </Grid.Row>
             </Grid>

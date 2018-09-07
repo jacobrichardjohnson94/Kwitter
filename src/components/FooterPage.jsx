@@ -2,7 +2,9 @@ import React from 'react';
 import { Col, Container, Row, Footer } from 'mdbreact';
 const style = {
   divFooter: {
-    paddingTop: '10em',
+    position: 'absolute',
+    bottom: '-20vh',
+    width: '100%',
   },
   footer: {
     backgroundColor: '#332600',

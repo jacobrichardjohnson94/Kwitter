@@ -12,7 +12,3 @@ body {
   width: 0px !important;
   background: transparent !important;
 }
-
-.ui.icon.input > i.icon:after,
-.ui.icon.input > i.icon:before {
-}
