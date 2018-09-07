@@ -16,13 +16,13 @@ import {
 const initialCreateUserState = {
   fetching: false,
   userCreated: false,
-  errResMessage: ''
+  errResMessage: '',
 };
 
 const initialAuthUserState = {
   loggedInUser: {},
   fetching: false,
-  loginError: ''
+  loginError: '',
 };
 
 export function createUserReducer(state = initialCreateUserState, action) {
@@ -31,8 +31,8 @@ export function createUserReducer(state = initialCreateUserState, action) {
       return {
         ...state,
         fetching: false,
-        errResMessage: action.errorMessage
-      }
+        errResMessage: action.errorMessage,
+      };
     case CREATE_USER_REQUEST:
       return {
         ...state,
@@ -51,10 +51,11 @@ export function createUserReducer(state = initialCreateUserState, action) {
 export function loginUserReducer(state = initialAuthUserState, action) {
   switch (action.type) {
     case LOGIN_USER_ERROR:
-    return {
-      fetching: false,
-      loginError: 'Invalid username or password'
-    }
+      return {
+        ...state,
+        fetching: false,
+        loginError: 'Invalid username or password',
+      };
     case LOGIN_USER_REQUEST:
       return {
         ...state,

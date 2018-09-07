@@ -13,10 +13,9 @@ import Logout from './Logout';
 import { Switch, Route } from 'react-router';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import AboutMe from './AboutMe.jsx'
+import AboutMe from './AboutMe.jsx';
 
 import ChangePw from './ChangePw';
-
 
 import '../App.css';
 
@@ -84,6 +83,7 @@ class App extends Component {
             <LoginForm />
           </Segment>
         </Container>
+        <FooterPage />
       </React.Fragment>
     );
     const logoutPage = (
@@ -94,6 +94,7 @@ class App extends Component {
             <Logout />
           </Segment>
         </Container>
+        <FooterPage />
       </React.Fragment>
     );
     const accountManagementPage = (
@@ -109,31 +110,29 @@ class App extends Component {
                 </Segment>
                 {/* <Segment> */}
                 <Grid.Row>
-
-                edit ? <AboutMe/>
+                  edit ? <AboutMe />
                 </Grid.Row>
                 {/* </Segment> */}
               </Grid>
             </Grid.Column>
 
             <Grid.Column floated="left">
-
-     
-
               <Grid centered container>
-              {this.props.loggedIn ? (<MessageList messages={this.props.loggedInUser.messages || []} />) : null}
-                
+                {this.props.loggedIn ? (
+                  <MessageList messages={this.props.loggedInUser.messages || []} />
+                ) : null}
               </Grid>
-
             </Grid.Column>
           </Grid.Row>
         </Grid>
+        <FooterPage />
       </React.Fragment>
     );
     const changePwPage = (
       <React.Fragment>
         <PageHeader />
         <ChangePw />
+        <FooterPage />
       </React.Fragment>
     );
     return (
