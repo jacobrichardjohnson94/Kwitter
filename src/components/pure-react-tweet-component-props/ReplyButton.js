@@ -7,11 +7,7 @@ const divStyle = {
 };
 
 const ReplyButton = () => {
-  return (
-    <div style={divStyle}>
-      <FontAwesome name="" className="fa fa-reply reply-button" />
-    </div>
-  );
+  return <div style={divStyle} />;
 };
 
 export default ReplyButton;
