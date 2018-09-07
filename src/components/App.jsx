@@ -83,7 +83,7 @@ class App extends Component {
     );
     const rootLayoutDesktop = (
       <React.Fragment>
-        <PageHeader />
+        <PageHeader headerWidth={isMobile ? '110%' : '100%'} />
         <Container>
           <Grid
             container
@@ -122,7 +122,7 @@ class App extends Component {
     );
     const loginPage = (
       <React.Fragment>
-        <PageHeader />
+        <PageHeader headerWidth={isMobile ? '110%' : '100%'} />
         <Container style={style.loginContainer}>
           <Segment>
             <LoginForm />
@@ -133,7 +133,7 @@ class App extends Component {
     );
     const logoutPage = (
       <React.Fragment>
-        <PageHeader />
+        <PageHeader headerWidth={isMobile ? '110%' : '100%'} />
         <Container style={style.loginContainer}>
           <Segment>
             <Logout />
@@ -144,7 +144,7 @@ class App extends Component {
     );
     const accountManagementPageDesktop = (
       <React.Fragment>
-        <PageHeader />
+        <PageHeader headerWidth={isMobile ? '110%' : '100%'} />
 
         <Grid container centered columns={2} style={style.grid}>
           <Grid.Row>
@@ -175,7 +175,7 @@ class App extends Component {
     );
     const accountManagementPageMobile = (
       <React.Fragment>
-        <PageHeader />
+        <PageHeader headerWidth={isMobile ? '110%' : '100%'} />
 
         <Grid container centered columns={1} style={style.grid}>
           <Grid.Row>
@@ -201,7 +201,7 @@ class App extends Component {
     );
     const changePwPage = (
       <React.Fragment>
-        <PageHeader />
+        <PageHeader headerWidth={isMobile ? '110%' : '100%'} />
         <ChangePw />
         {!isMobile ? <FooterPage /> : null}
       </React.Fragment>
