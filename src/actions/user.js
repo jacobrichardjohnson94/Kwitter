@@ -102,6 +102,7 @@ export function getAllUserInfoAsync(token, id) {
       .then(res => res.json())
       .then(data => {
         const user = data.user;
+        console.log(data.user)
         dispatch(getAllUserInfoReceived(user));
         return user;
       });
@@ -229,5 +230,6 @@ export const getAllUserInfoReceived = data => {
     createdAt: data.createdAt,
     updatedAt: data.updatedAt,
     messages: data.messages,
+    about: data.about
   };
 };

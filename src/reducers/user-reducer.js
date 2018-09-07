@@ -52,6 +52,7 @@ export function loginUserReducer(state = initialAuthUserState, action) {
   switch (action.type) {
     case LOGIN_USER_ERROR:
     return {
+      ...state,
       fetching: false,
       loginError: 'Invalid username or password'
     }
@@ -89,6 +90,7 @@ export function loginUserReducer(state = initialAuthUserState, action) {
           createdAt: action.createdAt,
           updatedAt: action.updatedAt,
           messages: action.messages,
+          about: action.about,
         },
         fetching: false,
       };

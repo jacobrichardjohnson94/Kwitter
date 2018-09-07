@@ -49,7 +49,7 @@ class MessageList extends Component {
       <Segment style={{width: '30rem'}}>
         <div style={style.container}>
           {this.props.fetching ? <LoadingAnimation /> : null}
-          <List style={style.list} divided verticalAlign="middle" horizontalAlign='middle'>
+          <List style={style.list} divided verticalAlign="middle">
             {messages.map(message => {
               let displayName;
               let username;
