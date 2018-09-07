@@ -110,7 +110,7 @@ class App extends Component {
                 {/* <Segment> */}
                 <Grid.Row>
 
-                  <AboutMe/>
+                edit ? <AboutMe/>
                 </Grid.Row>
                 {/* </Segment> */}
               </Grid>

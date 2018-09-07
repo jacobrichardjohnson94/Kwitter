@@ -12,15 +12,15 @@ import 'mdbreact/dist/css/mdb.css';
 import registerServiceWorker from './registerServiceWorker';
 import { ConnectedRouter } from 'connected-react-router';
 
-import { store, persistor, history } from './store.js';
+import { store, history } from './store.js';
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
+    {/* <PersistGate loading={null} persistor={persistor}> */}
       <ConnectedRouter history={history}>
         <App />
       </ConnectedRouter>
-    </PersistGate>
+    {/* </PersistGate> */}
   </Provider>,
   document.getElementById('root')
 );
