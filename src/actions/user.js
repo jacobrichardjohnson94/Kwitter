@@ -49,16 +49,16 @@ export function loginUserAsync(loginInfo) {
   };
 
   return dispatch => {
-    dispatch(loginUserRequest());
     let loginErr = false;
-
+    dispatch(loginUserRequest());
+    
     fetch(API_URL + 'auth/login', initialOptions)
-      .then(res => res.json())
+    .then(res => res.json())
       .then(data => {
         if (data.success === false) {
           dispatch(loginUserError());
-          console.log(data);
-          return (loginErr = true);
+          loginErr = true;
+          return loginErr
         } else {
           dispatch(loginUserReceived(data));
           return data;
@@ -78,7 +78,7 @@ export function loginUserAsync(loginInfo) {
         } else {
           return;
         }
-      });
+      })
   };
 }
 

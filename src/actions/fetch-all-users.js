@@ -16,7 +16,7 @@ export function fetchAllUsersAsync() {
       })
       .then(() => {
         dispatch(fetchAllMessagesAsync());
-      });
+      })
   };
 }
 

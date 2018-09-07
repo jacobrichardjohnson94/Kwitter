@@ -121,7 +121,8 @@ class App extends Component {
      
 
               <Grid centered container>
-                <MessageList messages={this.props.loggedInUser.messages || []} />
+              {this.props.loggedIn ? (<MessageList messages={this.props.loggedInUser.messages || []} />) : null}
+                
               </Grid>
 
             </Grid.Column>
