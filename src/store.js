@@ -28,8 +28,8 @@ const persistConfig = {
 export const history = createBrowserHistory();
 // const connectedRouter = connectRouter(history)(persistedReducer);
 const connectedRouter = connectRouter(history)(rootReducer);
-const composedEnhancers = composeEnhancers(
-  applyMiddleware(routerMiddleware(history), thunk)
-);
+
+const composedEnhancers = composeEnhancers(applyMiddleware(routerMiddleware(history), thunk));
+
 export const store = createStore(connectedRouter, composedEnhancers);
 // export let persistor = persistStore(store);

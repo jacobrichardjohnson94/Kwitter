@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, Image } from 'semantic-ui-react';
+import { List, Image, Segment } from 'semantic-ui-react';
 import SingleMessage from './SingleMessage';
 import { fetchTenMessagesAsync, fetchAllMessagesAsync } from '../actions/messages';
 import { fetchAllUsersAsync } from '../actions/fetch-all-users.js';
@@ -20,7 +20,8 @@ const style = {
     padding: '.2em',
     overflowX: 'hidden',
     overflowY: 'scroll',
-    background: '#F8F8F8',
+    // background: '#F8F8F8',
+    // border: 'gray 0.5px solid'
   },
 };
 
@@ -45,10 +46,10 @@ class MessageList extends Component {
     messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     !this.props.loggedIn ? (messages = messages.slice(0, 10)) : null;
     return (
-      <React.Fragment>
+      <Segment style={{width: '30rem'}}>
         <div style={style.container}>
           {this.props.fetching ? <LoadingAnimation /> : null}
-          <List style={style.list} divided verticalAlign="middle">
+          <List style={style.list} divided verticalAlign="middle" horizontalAlign='middle'>
             {messages.map(message => {
               let displayName;
               let username;
@@ -75,7 +76,7 @@ class MessageList extends Component {
             })}
           </List>
         </div>
-      </React.Fragment>
+      </Segment>
     );
   }
 }
