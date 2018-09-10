@@ -15,10 +15,10 @@ import { ConnectedRouter } from 'connected-react-router';
 import { store, history } from './store.js';
 
 ReactDOM.render(
-  <Provider store={store} basename={process.env.PUBLIC_URL}>
+  <Provider store={store}>
     {/* <PersistGate loading={null} persistor={persistor}> */}
 
-    <ConnectedRouter history={history}>
+    <ConnectedRouter basename={process.env.PUBLIC_URL} history={history}>
       <App />
     </ConnectedRouter>
 
