@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, Image, Segment } from 'semantic-ui-react';
+import { List, Image, Segment, Grid } from 'semantic-ui-react';
 import SingleMessage from './SingleMessage';
 import { fetchTenMessagesAsync, fetchAllMessagesAsync } from '../actions/messages';
 import { fetchAllUsersAsync } from '../actions/fetch-all-users.js';
@@ -49,6 +49,7 @@ class MessageList extends Component {
       <Segment style={{ width: '30rem' }}>
         <div style={style.container}>
           {this.props.fetching ? <LoadingAnimation /> : null}
+
           <List style={style.list} divided verticalAlign="middle">
             {messages.map(message => {
               let displayName;

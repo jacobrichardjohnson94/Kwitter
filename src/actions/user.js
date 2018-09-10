@@ -15,7 +15,7 @@ export const UPDATE_USER_PASSWORD_RESPONSE = 'UPDATE_USER_PASSWORD_RESPONSE ';
 export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST';
 export const DELETE_USER_RESPONSE = 'DELETE_USER_RESPONSE';
 
-const API_URL = 'https://kwitter-api.herokuapp.com/';
+const API_URL = 'https://stark-brook-53416.herokuapp.com/';
 
 export function logoutUserAsync() {
   const options = {

@@ -6,7 +6,7 @@ export const LIKE_MESSAGE = 'LIKE_MESSAGE';
 export const LIKED_MESSAGE_RESPONSE = 'LIKE_MESSAGE_RESPONSE';
 const LIKE_API_URL = 'https://kwitter-api.herokuapp.com/likes'
 
-const MESSAGE_API_URL = 'https://kwitter-api.herokuapp.com/messages?limit=1000';
+const MESSAGE_API_URL = 'https://stark-brook-53416.herokuapp.com/messages?limit=1000';
 
 export function fetchAllMessagesAsync() {
   return dispatch => {

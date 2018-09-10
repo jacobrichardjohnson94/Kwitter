@@ -24,7 +24,7 @@ class MessageInput extends Component {
       const body = {
         text: this.state.message,
       };
-      fetch('https://kwitter-api.herokuapp.com/messages', {
+      fetch('https://stark-brook-53416.herokuapp.com/messages', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${this.props.loggedInUserAuthKey}`,

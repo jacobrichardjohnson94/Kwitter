@@ -3,7 +3,8 @@ import { fetchAllMessagesAsync } from './messages';
 export const GET_ALL_USERS_REQUEST = 'GET_ALL_USERS_REQUEST';
 export const GET_ALL_USERS_RESPONSE = 'GET_ALL_USERS_RESPONSE';
 
-const USER_API_URL = 'https://kwitter-api.herokuapp.com/users';
+const USER_API_URL = 'https://stark-brook-53416.herokuapp.com/users';
+
 
 export function fetchAllUsersAsync() {
   return dispatch => {

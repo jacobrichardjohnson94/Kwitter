@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { updateUserPasswordAsync } from "../actions/user";
 import { Link, withRouter } from "react-router-dom";
 
-const USER_API_URL = "https://kwitter-api.herokuapp.com/users";
+const USER_API_URL = "https://stark-brook-53416.herokuapp.com/users";
 
 const style = {
   container: {

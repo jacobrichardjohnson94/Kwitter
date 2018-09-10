@@ -10,7 +10,7 @@ import {
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-const USER_API_URL = "https://kwitter-api.herokuapp.com/users";
+const USER_API_URL = "https://stark-brook-53416.herokuapp.com/users";
 
 class AboutMe extends Component {
   state = {
