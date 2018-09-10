@@ -1,51 +1,49 @@
-import React from "react";
-import { Component } from "react";
-import { Icon, Button, Form, Message, Grid } from "semantic-ui-react";
+import React from 'react';
+import { Component } from 'react';
+import { Icon, Button, Form, Message, Grid } from 'semantic-ui-react';
 
-import { connect } from "react-redux";
-import { updateUserPasswordAsync } from "../actions/user";
-import { Link, withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
+import { updateUserPasswordAsync } from '../actions/user';
+import { Link, withRouter } from 'react-router-dom';
 
-const USER_API_URL = "https://stark-brook-53416.herokuapp.com/users";
+const USER_API_URL = 'https://stark-brook-53416.herokuapp.com/users';
 
 const style = {
   container: {
-    marginTop: "4rem"
+    marginTop: '4rem',
     // width: '10rem'
   },
   paragraphText: {
-    fontSize: "20px"
+    fontSize: '20px',
   },
   headerText: {
-    fontSize: "25px"
-  }
+    fontSize: '25px',
+  },
 };
 
 class ChangePw extends Component {
   state = {
-    newPassword: "",
-    confirmNewPassword: "",
-    passwordChanged: false
+    newPassword: '',
+    confirmNewPassword: '',
+    passwordChanged: false,
   };
 
-  handlePasswordChange = event =>
-    this.setState({ newPassword: event.target.value });
-  handleConfirmPasswordChange = event =>
-    this.setState({ confirmNewPassword: event.target.value });
+  handlePasswordChange = event => this.setState({ newPassword: event.target.value });
+  handleConfirmPasswordChange = event => this.setState({ confirmNewPassword: event.target.value });
 
   handleSubmit = event => {
     const body = {
-      password: this.state.confirmNewPassword
+      password: this.state.confirmNewPassword,
     };
     event.preventDefault();
     if (this.state.newPassword === this.state.confirmNewPassword) {
       fetch(USER_API_URL, {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
           Authorization: `Bearer ${this.props.loggedInUserAuthKey}`,
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
       })
         .then(res => res.json())
         .then(data => {
@@ -56,7 +54,7 @@ class ChangePw extends Component {
             this.setState({ passwordChanged: true });
           }
         });
-      this.setState({ newPassword: "", confirmNewPassword: "" });
+      this.setState({ newPassword: '', confirmNewPassword: '' });
     }
   };
   render() {
@@ -87,27 +85,21 @@ class ChangePw extends Component {
             </Form.Input>
 
             <Button type="submit" onClick={this.handleSubmit} animated="fade">
-              <Button.Content visible>Submit</Button.Content>
-              <Button.Content hidden>
-                <Icon name="check" size="large" />
-              </Button.Content>
+              Submit
             </Button>
           </Form>
         </Grid.Column>
       </Grid>
     ) : (
-      <Grid  centered style={style.container}>
-      <Grid.Column textAlign='center' width={9}>
-        <Message>
-          <Message.Header style={style.headerText}>
-            Password Successfully Changed
-          </Message.Header>
-          <p style={style.paragraphText}>
-            You have successfully changed your password, click{" "}
-            <Link to="/account">here</Link> to go back to the account management
-            page.
-          </p>
-        </Message>
+      <Grid centered style={style.container}>
+        <Grid.Column textAlign="center" width={9}>
+          <Message>
+            <Message.Header style={style.headerText}>Password Successfully Changed</Message.Header>
+            <p style={style.paragraphText}>
+              You have successfully changed your password, click <Link to="/account">here</Link> to
+              go back to the account management page.
+            </p>
+          </Message>
         </Grid.Column>
       </Grid>
     );
@@ -116,13 +108,12 @@ class ChangePw extends Component {
 
 const mapStateToProps = state => {
   return {
-    loggedInUserAuthKey: state.loginUser.loggedInUser.token
+    loggedInUserAuthKey: state.loginUser.loggedInUser.token,
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    patchUserPassword: newPassword =>
-      dispatch(updateUserPasswordAsync(newPassword))
+    patchUserPassword: newPassword => dispatch(updateUserPasswordAsync(newPassword)),
   };
 };
 
