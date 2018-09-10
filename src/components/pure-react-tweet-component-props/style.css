@@ -1,0 +1,79 @@
+.tweet {
+  border: 1px solid #ccc;
+  width: 364px;
+  min-height: 90px;
+  max-height: 150px;
+  padding: 10px;
+  padding-bottom: 5px;
+  border-radius: 10px;
+  display: flex;
+  font-family: 'Helvetica', arial, sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  margin: 0.8em;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  max-width: 48px;
+  max-height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.name {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  margin-right: 0.3em;
+}
+
+.handle {
+  color: #8899a6;
+  font-size: 13px;
+}
+
+.buttons {
+  margin-top: 20px;
+  margin-bottom: 0;
+  margin-left: 2px;
+  font-size: 1.4em;
+  color: #aab8c2;
+}
+
+.time {
+  padding-left: 0.3em;
+  color: #8899a6;
+}
+
+.time::before {
+  content: '\00b7';
+  padding-right: 0.3em;
+}
+
+.reply-button,
+.retweet-button,
+.like-button,
+.more-options-button {
+  width: 60px;
+  display: inline-block;
+}
+
+.like-count,
+.retweet-count {
+  position: relative;
+  bottom: 2px;
+  font-size: 0.5em;
+  margin-left: 6px;
+  font-weight: bold;
+}
+.message,
+.name {
+  color: black;
+}
+.like-button {
+  display: flex;
+  align-items: center;
+}
